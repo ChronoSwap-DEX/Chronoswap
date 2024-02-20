@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/images/logo_NoText_NoWhite.png" />
       </Head>
       <Navbar />
-      <main>{children}</main>
+      <main className="bg-gray-900 min-h-screen">{children}</main>
     </>
   );
 }

@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col min-h-screen text-white">
       <section className="flex flex-col-reverse lg:grid lg:grid-cols-[auto_400px] gap-[100px] items-center justify-between my-10 mx-auto px-4 max-w-5xl">
         <div className="flex flex-col">
           <h1 className="md:text-4xl font-bold tracking-tighter lg:leading-[1.1] mb-4">
