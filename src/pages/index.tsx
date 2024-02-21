@@ -2,11 +2,11 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import TradeCard from "@/components/TradeCard"; // Component for the trading interface
-import StatisticCard from "@/components/StatisticCard"; // Component for the individual statistics
+import IndexLayout from '@/components/indexLayout';
 
 const Home: React.FC = () => {
-  // You would fetch real data here, possibly using `getStaticProps` or an API call
+  // You would fetch real data here, using the alephium libs
+  
   const stats = [
     { label: 'CHRON PRICE', value: '$0.26' },
     { label: 'TOTAL LIQUIDITY', value: '$16.09M' },
@@ -15,28 +15,25 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen text-white">
-      <section className="flex flex-col-reverse lg:grid lg:grid-cols-[auto_400px] gap-[100px] items-center justify-between my-10 mx-auto px-4 max-w-5xl">
-        <div className="flex flex-col">
-          <h1 className="md:text-4xl font-bold tracking-tighter lg:leading-[1.1] mb-4">
-            ChronoSwap the timeless DEX. 
-            <span className="text-blue-500"> Whenever.</span>
-          </h1>
-          <p className="sm:text-xl text-gray-400">
-            Unlock the world of cryptocurrency trading. Experience the freedom to trade over 20 tokens instantly on the Alephium blockchain, no registration needed.
-          </p>
-        </div>
-        <div className="w-full lg:max-w-md">
-          <TradeCard />
-        </div>
-      </section>
+    <IndexLayout>
+      <div className="flex flex-col min-h-screen justify-center items-center text-white">
+        
+        <section className="flex flex-col items-center justify-center my-10 mx-auto px-4 max-w-6xl text-center">
 
-      <section className="flex flex-wrap justify-around items-center my-10">
-        {stats.map((stat, idx) => (
-          <StatisticCard key={idx} label={stat.label} value={stat.value} />
-        ))}
-      </section>
-  </div>
+          <h1 className="text-4xl font-bold tracking-tighter mb-5">
+            ChronoSwap, the timeless DEX.
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Enter the cosmos of the Alephium ecosystem to trade over 20 tokens perpetually.
+          </p>
+          <Link href="/swap" className='w-full max-w-xs bg-gradient-to-tr from-blue-950 to-indigo-800 hover:bg-blue-700 text-center font-bold py-3 rounded-xl'>
+              Enter App
+          </Link>
+
+        </section>
+        
+      </div>
+  </IndexLayout>
   );
 };
 

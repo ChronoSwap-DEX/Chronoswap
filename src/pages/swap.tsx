@@ -2,6 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Image from 'next/image'
+import MainLayout from '@/components/mainLayout';
 
 // Assuming you have a list of tokens and a function to get exchange rates
 const tokens = ['ALPH', 'CHRON', 'OtherTokens...']; // Populate with actual tokens
@@ -50,6 +51,7 @@ export default function Swap() {
     };
 
   return (
+    <MainLayout>
     <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-950 to-indigo-800 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
 
     {/* Token Selection and Amount Input */}
@@ -123,6 +125,7 @@ export default function Swap() {
       Swap
     </button>
 
-  </div>
+    </div>
+  </MainLayout>
     );
 }
