@@ -1,0 +1,308 @@
+{
+  "version": "v2.8.3",
+  "name": "TokenPairFactory",
+  "bytecode": "0407114022402b4057406c408d4100010001010007b4a0014513107b1600a102010001010007b4a0014513107b1600a101010000000102a00102010302040017b417021602a0014513107b16021601a21602160116000f0da0020100170316030d0c1600010601000202000ab4a0014513107b16010d0c160001060000020402101600711702160171170316021603314c03160016010216011600020103040900404116001602a50c3316001603a50c331a130f7b1602160342130b7b16021603000517051704b1160416051406414c504800011304640c0c0c0c0c0c0c14001308641707170616001601a21604160544ce00160616070d1340ff3bc2170805160416051608a00061a0000d2aa100",
+  "codeHash": "44144899a2b71465a80654889afa8a2bf4a8f3cd0f30ad1880d2ffc7c12ad18b",
+  "fieldsSig": {
+    "names": [
+      "pairTemplateId",
+      "pairSize",
+      "feeSetter",
+      "feeCollectorFactory"
+    ],
+    "types": [
+      "ByteVec",
+      "U256",
+      "Address",
+      "ByteVec"
+    ],
+    "isMutable": [
+      false,
+      true,
+      true,
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "PairCreated",
+      "fieldNames": [
+        "token0",
+        "token1",
+        "pair",
+        "currentPairSize"
+      ],
+      "fieldTypes": [
+        "ByteVec",
+        "ByteVec",
+        "ByteVec",
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "setFeeCollectorFactory",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "factory"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "updateFeeSetter",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "newFeeSetter"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "getFeeSetter",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    },
+    {
+      "name": "enableFeeCollector",
+      "usePreapprovedAssets": true,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "tokenPair",
+        "alphAmount"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "updateFeeCollector",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "tokenPair",
+        "newFeeCollectorId"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "sortTokens",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": false,
+      "paramNames": [
+        "tokenA",
+        "tokenB"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": [
+        "ByteVec",
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "createPair",
+      "usePreapprovedAssets": true,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "payer",
+        "alphAmount",
+        "tokenAId",
+        "tokenBId"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256",
+        "ByteVec",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "ReserveOverflow",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        },
+        {
+          "name": "InsufficientInitLiquidity",
+          "value": {
+            "type": "U256",
+            "value": "1"
+          }
+        },
+        {
+          "name": "InsufficientLiquidityMinted",
+          "value": {
+            "type": "U256",
+            "value": "2"
+          }
+        },
+        {
+          "name": "InsufficientLiquidityBurned",
+          "value": {
+            "type": "U256",
+            "value": "3"
+          }
+        },
+        {
+          "name": "InvalidToAddress",
+          "value": {
+            "type": "U256",
+            "value": "4"
+          }
+        },
+        {
+          "name": "InsufficientLiquidity",
+          "value": {
+            "type": "U256",
+            "value": "5"
+          }
+        },
+        {
+          "name": "InvalidTokenInId",
+          "value": {
+            "type": "U256",
+            "value": "6"
+          }
+        },
+        {
+          "name": "InvalidCalleeId",
+          "value": {
+            "type": "U256",
+            "value": "7"
+          }
+        },
+        {
+          "name": "InvalidK",
+          "value": {
+            "type": "U256",
+            "value": "8"
+          }
+        },
+        {
+          "name": "InsufficientOutputAmount",
+          "value": {
+            "type": "U256",
+            "value": "9"
+          }
+        },
+        {
+          "name": "InsufficientInputAmount",
+          "value": {
+            "type": "U256",
+            "value": "10"
+          }
+        },
+        {
+          "name": "IdenticalTokenIds",
+          "value": {
+            "type": "U256",
+            "value": "11"
+          }
+        },
+        {
+          "name": "Expired",
+          "value": {
+            "type": "U256",
+            "value": "12"
+          }
+        },
+        {
+          "name": "InsufficientToken0Amount",
+          "value": {
+            "type": "U256",
+            "value": "13"
+          }
+        },
+        {
+          "name": "InsufficientToken1Amount",
+          "value": {
+            "type": "U256",
+            "value": "14"
+          }
+        },
+        {
+          "name": "TokenNotExist",
+          "value": {
+            "type": "U256",
+            "value": "15"
+          }
+        },
+        {
+          "name": "InvalidCaller",
+          "value": {
+            "type": "U256",
+            "value": "16"
+          }
+        },
+        {
+          "name": "FeeCollectorNotEnabled",
+          "value": {
+            "type": "U256",
+            "value": "17"
+          }
+        }
+      ]
+    }
+  ]
+}

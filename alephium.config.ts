@@ -1,11 +1,10 @@
 import { Configuration } from '@alephium/cli'
-import { Number256 } from '@alephium/web3'
+import { Address } from '@alephium/web3'
 
 // Settings are usually for configuring
 export type Settings = {
-  issueTokenAmount: Number256
+  feeSetter?: Address
 }
-const defaultSettings: Settings = { issueTokenAmount: 100n }
 
 const configuration: Configuration<Settings> = {
   networks: {
@@ -14,20 +13,24 @@ const configuration: Configuration<Settings> = {
       privateKeys: [
         'a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5' // group 0
       ],
-      settings: defaultSettings
+      settings: { feeSetter: '1DrDyTr9RpRsQnDnXo2YRiPzPW4ooHX5LLoqXrqfMrpQH' }
     },
 
     testnet: {
       nodeUrl: (process.env.NODE_URL as string) ?? 'https://wallet-v20.testnet.alephium.org',
       privateKeys: process.env.PRIVATE_KEYS === undefined ? [] : process.env.PRIVATE_KEYS.split(','),
-      settings: defaultSettings
+      settings: { feeSetter: '19ymyoDKsqgYtEZoJva1BQr14oeYzaCHve9nnQXSuqLiH' }
     },
 
     mainnet: {
       nodeUrl: (process.env.NODE_URL as string) ?? 'https://wallet-v20.mainnet.alephium.org',
       privateKeys: process.env.PRIVATE_KEYS === undefined ? [] : process.env.PRIVATE_KEYS.split(','),
-      settings: defaultSettings
+      settings: {}
     }
+  },
+  compilerOptions: {
+    errorOnWarnings: true,
+    ignoreUnusedConstantsWarnings: true
   }
 }
 

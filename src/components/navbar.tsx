@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { CustomFlowbiteTheme, Navbar, Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 import { AiOutlineSwap } from 'react-icons/ai'
-import { MdPool, MdWaterDrop, MdWater, MdCandlestickChart, MdLock  } from "react-icons/md";
+import { MdPool, MdWaterDrop, MdWater, MdCandlestickChart, MdLock, MdAddCircle, MdOutlineRemoveCircle } from "react-icons/md";
 
 
 export const CustomNavbar: React.FC = () => {
@@ -45,7 +45,11 @@ const customTheme: CustomFlowbiteTheme['sidebar'] = {
   "collapse": {
     "button": "group flex w-full items-center rounded-lg p-2 text-base font-normal transition duration-75 hover:bg-indigo-900 text-white",
     "icon": {
-      "base": "h-6 w-6 text-white"
+      "base": "h-6 w-6",
+      "open": {
+        "off": "text-white",
+        "on": "text-gray-300"
+      }
     },
     "label": {
       "base": "ml-3 flex-1 whitespace-nowrap text-left",
@@ -101,14 +105,15 @@ export const CustomSidebar: React.FC = () => {
           <Sidebar.Item as={Link} href="/swap" icon={AiOutlineSwap} >
             Swap
           </Sidebar.Item>
-          
-          <Sidebar.Item as={Link} href="/liquidity" icon={MdWaterDrop} >
-            Liquidity
-          </Sidebar.Item>
 
-          <Sidebar.Collapse icon={MdPool} label="Pools">
-            <Sidebar.Item as={Link} href="/pools">Pools</Sidebar.Item>
-            <Sidebar.Item as={Link} href="/addpool">Add Pool</Sidebar.Item>
+          <Sidebar.Collapse icon={MdWaterDrop} label="Liquidity">
+            <Sidebar.Item as={Link} icon={MdAddCircle} href="/add-liquidity">Add Liquidity</Sidebar.Item>
+            <Sidebar.Item as={Link} icon={MdOutlineRemoveCircle} href="/remove-liquidity">Remove Liquidity</Sidebar.Item>
+          </Sidebar.Collapse>
+
+          <Sidebar.Collapse icon={MdWater} label="Pools">
+            <Sidebar.Item as={Link} icon={MdPool} href="/pools">Pools</Sidebar.Item>
+            <Sidebar.Item as={Link} icon={MdAddCircle} href="/addPool">Add Pool</Sidebar.Item>
           </Sidebar.Collapse>
           
         </Sidebar.ItemGroup>

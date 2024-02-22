@@ -1,13 +1,14 @@
 import React from 'react';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { tokenFaucetConfig } from "@/services/utils";
-import { AlephiumWalletProvider } from "@alephium/web3-react"
+import { network, networkId } from "@/utils/consts";
+import { AlephiumWalletProvider } from "@alephium/web3-react";
+import "../css/CircleLoader.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     
-      <AlephiumWalletProvider addressGroup={tokenFaucetConfig.groupIndex} network={tokenFaucetConfig.network}>
+      <AlephiumWalletProvider addressGroup={network.groupIndex} network={networkId}>
           <Component {...pageProps} />
       </AlephiumWalletProvider>
   );

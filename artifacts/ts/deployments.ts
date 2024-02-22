@@ -4,22 +4,61 @@
 
 import { RunScriptResult, DeployContractExecutionResult } from "@alephium/cli";
 import { NetworkId } from "@alephium/web3";
-import { TokenFaucet, TokenFaucetInstance } from ".";
+import {
+  TokenPair,
+  TokenPairInstance,
+  TokenPairFactory,
+  TokenPairFactoryInstance,
+  Router,
+  RouterInstance,
+  FeeCollectorPerTokenPairImpl,
+  FeeCollectorPerTokenPairImplInstance,
+  FeeCollectorFactoryImpl,
+  FeeCollectorFactoryImplInstance,
+} from ".";
 import { default as devnetDeployments } from "../.deployments.devnet.json";
 
 export type Deployments = {
   deployerAddress: string;
   contracts: {
-    TokenFaucet: DeployContractExecutionResult<TokenFaucetInstance>;
+    TokenPair: DeployContractExecutionResult<TokenPairInstance>;
+    TokenPairFactory: DeployContractExecutionResult<TokenPairFactoryInstance>;
+    Router: DeployContractExecutionResult<RouterInstance>;
+    FeeCollectorPerTokenPairImpl: DeployContractExecutionResult<FeeCollectorPerTokenPairImplInstance>;
+    FeeCollectorFactoryImpl: DeployContractExecutionResult<FeeCollectorFactoryImplInstance>;
   };
 };
 
 function toDeployments(json: any): Deployments {
   const contracts = {
-    TokenFaucet: {
-      ...json.contracts["TokenFaucet"],
-      contractInstance: TokenFaucet.at(
-        json.contracts["TokenFaucet"].contractInstance.address
+    TokenPair: {
+      ...json.contracts["TokenPair"],
+      contractInstance: TokenPair.at(
+        json.contracts["TokenPair"].contractInstance.address
+      ),
+    },
+    TokenPairFactory: {
+      ...json.contracts["TokenPairFactory"],
+      contractInstance: TokenPairFactory.at(
+        json.contracts["TokenPairFactory"].contractInstance.address
+      ),
+    },
+    Router: {
+      ...json.contracts["Router"],
+      contractInstance: Router.at(
+        json.contracts["Router"].contractInstance.address
+      ),
+    },
+    FeeCollectorPerTokenPairImpl: {
+      ...json.contracts["FeeCollectorPerTokenPairImpl"],
+      contractInstance: FeeCollectorPerTokenPairImpl.at(
+        json.contracts["FeeCollectorPerTokenPairImpl"].contractInstance.address
+      ),
+    },
+    FeeCollectorFactoryImpl: {
+      ...json.contracts["FeeCollectorFactoryImpl"],
+      contractInstance: FeeCollectorFactoryImpl.at(
+        json.contracts["FeeCollectorFactoryImpl"].contractInstance.address
       ),
     },
   };

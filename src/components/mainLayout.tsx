@@ -11,8 +11,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/images/logo_NoText_NoWhite.png" />
       </Head>
 
-        <CustomNavbar />
-
+      <CustomNavbar />
 
       <div className="flex">
         <CustomSidebar />

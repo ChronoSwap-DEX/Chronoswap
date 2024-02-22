@@ -4,4 +4,4 @@ lerna-debug.log
 /dist
 /dev
 .deployments.devnet.json
-.next
+/.next

@@ -3,11 +3,211 @@
 @tailwind utilities;
 
 body{
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+  
+  .numberField > * > .MuiInputBase-input {
+    text-align: right;
+    height: 100%;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    font-family: "Roboto Mono", monospace;
+    caret-shape: block;
+    width: 0;
   }
   
+  .numberField > * > .MuiInputBase-input::-webkit-outer-spin-button,
+  .numberField > * > .MuiInputBase-input::-webkit-inner-spin-button,
+  .numberField > * > input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+  }
+  
+  .tokenContainerWithBalance {
+    min-height: 44px;
+    padding: 0.2rem 0.8rem;
+    border: 3px solid #333333;
+    border-radius: 10px;
+    width: initial;
+    height: 80px;
+  }
+  
+  .balance {
+    display: flex;
+    padding: 0.1rem;
+  }
+  
+  .inputRow {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .tokenContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid #333333;
+    padding: 0.6rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    height: 60px;
+  }
+  
+  .tokenContainer > * {
+    margin: 0.1rem;
+  }
+  
+  .centeredContainer {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .spacer {
+    height: 1rem;
+  }
+  
+  .mainPaper {
+    padding: 2rem;
+    background-color: black;
+  }
+  
+  .titleBar {
+    margin-top: 10rem;
+  }
+  
+  .titleBar > * {
+    margin: 0.5rem;
+    align-self: flex-end;
+  }
+  
+  .gradientButton {
+    background-image: linear-gradient(45deg, /* COLORS.blue value */ 0%, /* COLORS.nearBlack + 20 transparency value */ 50%, /* COLORS.blue + 30 transparency value */ 62%, /* COLORS.nearBlack + 50 transparency value */ 120%);
+    transition: 0.75s;
+    background-size: 200% auto;
+    box-shadow: 0 0 20px #222;
+    width: 100%;
+    height: 3rem;
+    margin-top: 1rem;
+  }
+  
+  .gradientButton:hover {
+    background-position: right center;
+  }
+  
+  .disabled {
+    background: grey;
+  }
+  
+  .loaderHolder {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .successIcon {
+    color: green;
+    font-size: 200px;
+  }
+  
+  .error {
+    margin-top: 1rem; /* Adjust based on theme spacing */
+    text-align: center;
+  }
+  
+  .notification {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .leftAlign {
+    text-align: left;
+    font-size: 15px;
+    font-family: monospace;
+  }
+  
+  .rightAlign {
+    text-align: right;
+    font-size: 15px;
+    font-family: monospace;
+  }
+  
+  .tokenPairContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    height: 30px;
+  }
+  
+.root {
+  position: "relative";
+}
+
+.button {
+  margin-top: 2;
+  text-transform: "none";
+  width: "100%";
+}
+
+.loader {
+  position: "absolute";
+  bottom: 0;
+  left: "50%";
+  margin-left: -12;
+  margin-bottom: 6;
+}
+
+.flexTitle {
+  display: flex;
+  align-items: center;
+}
+
+.flexTitle > div {
+  flex-grow: 1;
+  margin-right: 32px; /* Adjust this value based on your theme's spacing */
+}
+
+.flexTitle > button {
+  margin-right: -8px; /* Adjust if your theme's spacing is different */
+}
+
+.selectedCard:hover {
+  cursor: pointer;
+  box-shadow: inset 0 0 50px 50px rgba(255, 255, 255, 0.1);
+}
+
+.selectedCard {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  width: max-content;
+  padding: 0.5rem;
+  background: linear-gradient(90deg, rgba(69,74,117,.2) 0%, rgba(138,146,178,.2) 33%, rgba(69,74,117,.5) 66%, rgba(98,104,143,.5) 100%), linear-gradient(45deg, rgba(153,69,255,.1) 0%, rgba(121,98,231,.1) 20%, rgba(0,209,140,.1) 100%);
+}
+
+.medium {
+  padding: 1.5rem 3rem;
+}
+
+.style2 {
+  background: linear-gradient(270deg, rgba(69,74,117,.2) 0%, rgba(138,146,178,.2) 33%, rgba(69,74,117,.5) 66%, rgba(98,104,143,.5) 100%), linear-gradient(45deg, rgba(153,69,255,.1) 0%, rgba(121,98,231,.1) 20%, rgba(0,209,140,.1) 100%);
+}
+
+.selectedSymbol {
+  font-family: Monospace;
+  margin: 0.5rem;
+  font-size: 15px;
+}
+
+.icon {
+  height: 20px;
+  max-width: 20px;
+}
