@@ -15,14 +15,14 @@ import CloseIcon from "@mui/material/Icon";
 import { bigIntToString, TokenList } from "../utils/dex";
 import { TokenInfo } from '@alephium/token-list'
 import { MyDialog } from "@/components/MyDialog";
+import Image from "next/image"
 
 interface TokenSelectProps {
   tokenId: string | undefined
   counterpart: string | undefined
   onChange: any
   tokenBalances: Map<string, bigint>
-  style2?: boolean
-  mediumSize?: boolean
+  className?: string
 }
 
 const TokenOptions = ({
@@ -64,8 +64,7 @@ export default function TokenSelectDialog({
   counterpart,
   onChange,
   tokenBalances,
-  style2,
-  mediumSize
+  className
 }: TokenSelectProps) {
   const [open, setOpen] = useState(false);
 
@@ -88,35 +87,31 @@ export default function TokenSelectDialog({
         close={handleClose}
       />
     );
-
-  const style = "selectedCard" +
-    (style2 ? ' ' + "style2" : '') +
-    (mediumSize ? ' ' + "medium" : '')
+    
   return (
     <>
-      <Card
+      <button
         onClick={handleClick}
-        raised
-        className={style}
-      >
+        className={`${className} w-full bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow text-md font-medium m-4 flex items-center justify-center`}>
         {info ? (
           <>
-            <img
+            <Image
               src={info.logoURI}
               className="icon"
-              alt={info.name}
-            />
-            <Typography variant="h6" className="selectedSymbol">
+              alt={info.name} width={32} height={32}/>
+
+            <h6 className="p-2 text-white">
               {info.name}
-            </Typography>
+            </h6>
           </>
           ): (
-            <Typography variant="h6" className="selectedSymbol">
+            <h6 className="p-2 text-white">
               Select token
-            </Typography>
+            </h6>
           )
         }
-      </Card>
+      </button>
+
       <MyDialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
         <DialogTitle>
           <div className="flexTitle">

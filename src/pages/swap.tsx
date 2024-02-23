@@ -52,7 +52,7 @@ export default function Swap() {
 
   return (
     <MainLayout>
-      <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-950 to-indigo-800 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
+      <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
 
       {/* Token Selection and Amount Input */}
       <div className="space-y-4">
@@ -60,7 +60,7 @@ export default function Swap() {
 
           <div className="relative">
               <label className="block text-sm font-medium">From</label>
-              <div className="flex items-center bg-gray-800 rounded-lg overflow-hidden">
+              <div className="flex items-center bg-gradient-to-br from-blue-950 to-indigo-950 rounded-lg overflow-hidden">
                   
                   <input type="number" value={amount} onChange={handleChangeAmount} className="flex-grow p-3 bg-transparent focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-white" placeholder='0.0'  />
                       
@@ -78,7 +78,7 @@ export default function Swap() {
 
           <div className="relative">
               <label className="block text-sm font-medium">From</label>
-              <div className="flex items-center bg-gray-800 rounded-lg overflow-hidden">
+              <div className="flex items-center bg-gradient-to-br from-blue-950 to-indigo-950 rounded-lg overflow-hidden">
                   
                   <input type="text" value={calculatedAmount} onChange={handleChangeAmount} className="flex-grow p-3 bg-transparent focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-white" placeholder='0.0'  />
                       
@@ -96,7 +96,7 @@ export default function Swap() {
       </div>
 
       {/* Transaction Details */}
-      <div className="my-4 p-4 bg-gradient-to-tl from-blue-950 to-purple-indigo  rounded-2xl rounded">
+      <div className="my-4 p-4 bg-gradient-to-br from-blue-950 to-indigo-950  rounded-2xl">
               <div className="flex justify-between">
                   <span>Price:</span>
                   <span>1 {fromToken} = {exchangeRate} {toToken}</span>
@@ -120,7 +120,7 @@ export default function Swap() {
       </div>
 
       {/* Swap Button */}
-      <button onClick={handleSwap} className="w-full py-3 bg-blue-900 hover:bg-blue-950 rounded-lg shadow text-lg font-bold mt-4">
+      <button onClick={handleSwap} className="w-6/12 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow text-md font-bold mt-4">
         Swap
       </button>
 

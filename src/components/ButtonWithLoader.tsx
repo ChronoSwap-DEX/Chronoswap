@@ -25,7 +25,7 @@ export default function ButtonWithLoader({
 
   return (
     <>
-      <div className="root">
+
         <Button
           color="primary"
           variant="contained"
@@ -36,16 +36,15 @@ export default function ButtonWithLoader({
         </Button>
         {showLoader ? (
           <CircularProgress
-            size={24}
+            size={15}
             color="inherit"
             className={className || "loader"}
           />
         ) : null}
-      </div>
       {error ? (
-        <Typography color="error" className="error">
-          {error}
-        </Typography>
+        <p className="block text-md font-medium text-red-600 error">
+        {error}
+        </p>
       ) : null}
     </>
   );

@@ -62,21 +62,22 @@ function AddPool() {
   };
 
   const tokenPairContent = (
-    <div className="flex">
-      <TokenSelectDialog
-        tokenId={tokenAInfo?.id}
-        counterpart={tokenBInfo?.id}
-        onChange={handleTokenAChange}
-        tokenBalances={balance}
-        mediumSize={true}
-      />
+    <div className="flex justify-between items-center w-full">
+      <div className="flex-1 flex justify-center">
+        <TokenSelectDialog
+          tokenId={tokenAInfo?.id}
+          counterpart={tokenBInfo?.id}
+          onChange={handleTokenAChange}
+          tokenBalances={balance} />
+      </div>
+      <div className="flex-1 flex justify-center">
       <TokenSelectDialog
         tokenId={tokenBInfo?.id}
         counterpart={tokenAInfo?.id}
         onChange={handleTokenBChange}
-        tokenBalances={balance}
-        mediumSize={true}
-      />
+        tokenBalances={balance}/>
+      </div>
+      
     </div>
   )
 
@@ -104,7 +105,7 @@ function AddPool() {
   }, [signer, account, connectionStatus, explorerProvider, tokenAInfo, tokenBInfo, updateBalanceForTx])
 
   const readyToAddPool =
-    connectionStatus === 'connected'
+    connectionStatus === 'connected' &&
     tokenAInfo !== undefined &&
     tokenBInfo !== undefined &&
     !addingPool && !completed && 
@@ -114,7 +115,7 @@ function AddPool() {
     <ButtonWithLoader
       disabled={!readyToAddPool}
       onClick={handleAddPool}
-      className={"gradientButton" + (!readyToAddPool ? " " + "disabled" : "")}>
+      className={"w-6/12 py-3 bg-blue-800 hover:bg-blue-950 rounded-md text-md font-bold mt-4" + (!readyToAddPool ? " " + "disabled" : "")}>
         Add Pool
     </ButtonWithLoader>
     
@@ -122,13 +123,13 @@ function AddPool() {
 
   return (
     <MainLayout>
-      <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-950 to-indigo-800 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
+      <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
 
         <div className="space-y-4">
           <label className="block text-lg">Add Pool</label>
 
           <div className="relative">
-            <Paper className="p-4 bg-blue-950 rounded-lg overflow-hidden">
+            <div className="p-4 overflow-hidden">
               <WaitingForTxSubmission open={!!addingPool && !completed} text="Adding Pool"/>
               <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Add Liquidity" onClick={redirectToAddLiquidity} />
               {connectionStatus !== 'connected' ?
@@ -145,24 +146,27 @@ function AddPool() {
               }
               
               <div>
-                <Collapse in={!addingPool && !completed && connectionStatus === 'connected'}>
+                <Collapse in={!addingPool && !completed && connectionStatus === 'connected' }>
                   {
                     <>
                       {tokenPairContent}
                       <div className="spacer"/>
                       {error ? (
-                        <Typography variant="body2" color="error" className="error">
+                        <p className="block text-md font-medium text-red-600 error">
                           {error}
-                        </Typography>
+                        </p>
                       ) : null}
                       <div className="spacer"/>
                     </>
                   }
-                  {addPoolButton}
+                  <div className="flex justify-center">
+                    {addPoolButton}
+                  </div>
+                  
                 </Collapse>
               </div>
 
-            </Paper>
+            </div>
 
           </div>
         </div>
