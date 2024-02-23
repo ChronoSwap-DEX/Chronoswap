@@ -1,30 +1,30 @@
 [
   {
-    "id": "9071f41e690a66f73cee3fb0542cfc2aa598142ad28d03164767edaa1e71f200",
+    "id": "f57ba83f7b828847faee2f612cf977d122e780e33fa4125f5c64abf0ad2ecb00",
     "symbol": "TT-0",
     "name": "TestToken0",
     "decimals": 18
   },
   {
-    "id": "ea76d4bf9df09b71488ba43f6357df145cbbe7407ab4070371552185f56a5a00",
+    "id": "02f9436d8a3831b376a12939a59c9b676ca058ae29aa8c9f4b61c54840935400",
     "symbol": "TT-1",
     "name": "TestToken1",
     "decimals": 18
   },
   {
-    "id": "9e9a81e8d490b75c80b3084a58ab0dc21dac0705f8a0b42a0019cf97ed7aa600",
+    "id": "150ecb0549371d6e4905d6fddb7acd9aaf8bafc115bff018c99b97f618ed0c00",
     "symbol": "TT-2",
     "name": "TestToken2",
     "decimals": 18
   },
   {
-    "id": "6a2bfa459af4256dc9ccd60a654fd6281765c44a9a1875d72b6bcb51c328b200",
+    "id": "dce584604c86d04416bf2262831df26b8c19bcd85c3dcba0142e0423a4e82200",
     "symbol": "TT-3",
     "name": "TestToken3",
     "decimals": 18
   },
   {
-    "id": "45c82f604a7882fc1c988af5ceda7f21cedf5f2c8153d29489f00be79b241600",
+    "id": "4c324b2254cc6825c83d1b0336b522a752912296c85dcc3da46390cad1a12400",
     "symbol": "TT-4",
     "name": "TestToken4",
     "decimals": 18

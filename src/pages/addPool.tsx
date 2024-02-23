@@ -5,13 +5,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import ButtonWithLoader from "@/components/ButtonWithLoader";
 import { tokenPairExist, createTokenPair } from "../utils/dex";
 import { useAvailableBalances } from "../hooks/useAvailableBalance";
-
 import TokenSelectDialog from "@/components/TokenSelectDialog";
-
 import { useRouter } from 'next/router';
-
 import { TransactionSubmitted, WaitingForTxSubmission } from "@/components/Transactions";
-
 import { useWallet } from "@alephium/web3-react";
 import MainLayout from "@/components/mainLayout";
 
