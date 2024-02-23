@@ -10,8 +10,6 @@ import {
   ExplorerProvider
 } from "@alephium/web3"
 
-import alephiumIcon from "@/icons/alephium.svg";
-
 import { PollingInterval, network, networkId } from "./consts"
 import BigNumber from "bignumber.js"
 import { parseUnits } from "ethers/lib/utils";
@@ -586,7 +584,7 @@ export async function createTokenPair(
 
 export const ALPHTokenInfo: TokenInfo = {
   ...ALPHInfo,
-  logoURI: alephiumIcon
+  logoURI: '/images/alephium.svg'
 }
 
 export const TokenList = getTokenInfos()
@@ -595,19 +593,31 @@ export function getTokenInfo(tokenId: string): TokenInfo | undefined {
   return TokenList.find((t) => t.id.toLowerCase() === tokenId )
 }
 
+// Define a function that returns an array of TokenInfo objects.
 export function getTokenInfos(): TokenInfo[] {
+  // Check if the current network ID is 'mainnet'.
   if (networkId === 'mainnet') {
-    return [ALPHTokenInfo, ...mainnetTokensMetadata.tokens]
+    // Return an array with ALPHTokenInfo as the first element,
+    // followed by all token information objects from mainnetTokensMetadata.
+    return [ALPHTokenInfo, ...mainnetTokensMetadata.tokens];
   }
+  
+  // Check if the current network ID is 'testnet'.
   if (networkId === 'testnet') {
-    return [ALPHTokenInfo, ...testnetTokensMetadata.tokens]
+    // Return an array with ALPHTokenInfo as the first element,
+    // followed by all token information objects from testnetTokensMetadata.
+    return [ALPHTokenInfo, ...testnetTokensMetadata.tokens];
   }
+  
+  // If the network is not 'mainnet' or 'testnet', proceed with 'devnet' tokens.
+  // Map each tokenInfo from devnetTokenList to a new TokenInfo object.
   return (devnetTokenList as TokenInfo[]).map<TokenInfo>((tokenInfo) => {
+    // Return a new object for each tokenInfo.
     return {
-      ...tokenInfo,
-      logoURI: genLogo(tokenInfo.name)
+      ...tokenInfo, // Spread the properties of the current tokenInfo.
+      logoURI: genLogo(tokenInfo.name) // Override the logoURI property with a generated URI.
     }
-  }).concat([ALPHTokenInfo])
+  }).concat([ALPHTokenInfo]) // Concatenate ALPHTokenInfo to the end of the transformed array.
 }
 
 // This is only used for user inputs

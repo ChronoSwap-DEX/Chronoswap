@@ -31,8 +31,7 @@ export default function ButtonWithLoader({
           variant="contained"
           className={className || "button"}
           disabled={disabled}
-          onClick={onClick}
-        >
+          onClick={onClick}>
           {children}
         </Button>
         {showLoader ? (

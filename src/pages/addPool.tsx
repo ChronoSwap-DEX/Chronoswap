@@ -58,7 +58,7 @@ function AddPool() {
     setTxId(undefined)
     setAddingPool(false)
     setError(undefined)
-    router.push('/addpool')
+    router.push('/addliquidity')
   };
 
   const tokenPairContent = (
@@ -109,60 +109,65 @@ function AddPool() {
     tokenBInfo !== undefined &&
     !addingPool && !completed && 
     error === undefined
+
   const addPoolButton = (
     <ButtonWithLoader
       disabled={!readyToAddPool}
       onClick={handleAddPool}
-      className={"gradientButton" + (!readyToAddPool ? " " + "disabled" : "")}
-    >
-      Add Pool
+      className={"gradientButton" + (!readyToAddPool ? " " + "disabled" : "")}>
+        Add Pool
     </ButtonWithLoader>
+    
   );
 
   return (
     <MainLayout>
-      <Container className="centeredContainer text-white" maxWidth="sm">
-      <div className="titleBar "></div>
-        Add Pool
-      <div className="spacer"/>
-      <Paper className="mainPaper">
-        <WaitingForTxSubmission
-          open={!!addingPool && !completed}
-          text="Adding Pool"
-        />
-        <TransactionSubmitted
-          open={!!completed}
-          txId={txId!}
-          buttonText="Add Liquidity"
-          onClick={redirectToAddLiquidity}
-        />
-        {connectionStatus !== 'connected' ?
-          <div>
-            <Typography variant="h6" color="error" className="error">
-              Your wallet is not connected
-            </Typography>
-          </div> : null
-        }
-        <div>
-          <Collapse in={!addingPool && !completed && connectionStatus === 'connected'}>
-            {
-              <>
-                {tokenPairContent}
-                <div className="spacer"/>
-                {error ? (
-                  <Typography variant="body2" color="error" className="error">
-                    {error}
-                  </Typography>
-                ) : null}
-                <div className="spacer"/>
-              </>
-            }
-            {addPoolButton}
-          </Collapse>
+      <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-950 to-indigo-800 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
+
+        <div className="space-y-4">
+          <label className="block text-lg">Add Pool</label>
+
+          <div className="relative">
+            <Paper className="p-4 bg-blue-950 rounded-lg overflow-hidden">
+              <WaitingForTxSubmission open={!!addingPool && !completed} text="Adding Pool"/>
+              <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Add Liquidity" onClick={redirectToAddLiquidity} />
+              {connectionStatus !== 'connected' ?
+                <div className="text-white">
+                  <p color="red" className="block text-xl font-bold text-red-600 error">
+                    Your wallet is not connected!
+                  </p>
+
+                  <p className="block text-md font-medium error">
+                    Use the "Connect Alephium" button in the top right, to connect your wallet.
+                  </p>
+                  
+                </div> : null
+              }
+              
+              <div>
+                <Collapse in={!addingPool && !completed && connectionStatus === 'connected'}>
+                  {
+                    <>
+                      {tokenPairContent}
+                      <div className="spacer"/>
+                      {error ? (
+                        <Typography variant="body2" color="error" className="error">
+                          {error}
+                        </Typography>
+                      ) : null}
+                      <div className="spacer"/>
+                    </>
+                  }
+                  {addPoolButton}
+                </Collapse>
+              </div>
+
+            </Paper>
+
+          </div>
         </div>
-      </Paper>
-      <div className="spacer" />
-    </Container>
+      
+      </div>
     </MainLayout>
     
   );
