@@ -86,7 +86,7 @@ export function getExplorerLink(txId: string): string {
     ? `https://explorer.alephium.org/transactions/${txId}`
     : networkId === 'testnet'
     ? `https://explorer.testnet.alephium.org/transactions/${txId}`
-    : `http://localhost:3000/${txId}`
+    : `http://localhost:23000/transactions/${txId}`
 }
 
 export interface TokenPairState {

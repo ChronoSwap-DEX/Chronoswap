@@ -20,21 +20,26 @@ import { waitTxConfirmed } from './utils'
 
 const oneAlph = 10n ** 18n
 
-async function createTokens(signer: SignerProvider, num: number): Promise<TokenInfo[]> {
+// Assuming decimals is 18
+const decimals = 18n;
+
+// Calculate 10 million tokens in the smallest unit (taking into account decimals)
+const tenMillionTokensInSmallestUnit = 10_000_000n * (10n ** decimals);
+
+async function createTokens(signer: SignerProvider): Promise<TokenInfo[]> {
   const tokenInfos: TokenInfo[] = []
   const account = await signer.getSelectedAccount()
   const nodeProvider = signer.nodeProvider ?? web3.getCurrentNodeProvider()
-  for (let i = 0; i < num; i++) {
-    const symbol = `TT-${i}`
-    const name = `TestToken${i}`
+    const symbol = `CHRON`
+    const name = `Chrono`
     const deployResult = await TestToken.deploy(signer, {
       initialFields: {
         symbol: Buffer.from(symbol, 'utf8').toString('hex'),
         name: Buffer.from(name, 'utf8').toString('hex'),
-        decimals: 18n,
-        totalSupply: 1n << 255n
+        decimals: decimals,
+        totalSupply: tenMillionTokensInSmallestUnit
       },
-      issueTokenAmount: 1n << 255n
+      issueTokenAmount: tenMillionTokensInSmallestUnit
     })
     await waitTxConfirmed(nodeProvider, deployResult.txId, 1)
     tokenInfos.push({
@@ -48,7 +53,7 @@ async function createTokens(signer: SignerProvider, num: number): Promise<TokenI
       initialFields: {
         token: deployResult.contractInstance.contractId,
         sender: account.address,
-        amount: 1n << 100n
+        amount: tenMillionTokensInSmallestUnit
       },
       attoAlphAmount: oneAlph
     })
@@ -56,7 +61,8 @@ async function createTokens(signer: SignerProvider, num: number): Promise<TokenI
     console.log(
       `Create test token succeed, name: ${name}, symbol: ${symbol}, token id: ${deployResult.contractInstance.contractId}, token address: ${deployResult.contractInstance.address}`
     )
-  }
+  
+
   return tokenInfos
 }
 
@@ -181,18 +187,16 @@ function getSigner(privateKeys: string[] | string, index: number) {
 program
   .command('create-tokens')
   .description('create test tokens on devnet')
-  .requiredOption('-n, --num <number>', 'token number')
   .option('--create-pair', 'create token pairs', false)
   .option('--init', 'add init liquidity for token pairs', false)
   .option('-k, --key-index <number>', 'private key index')
   .action(async (opts) => {
     try {
-      const tokenNumber = opts.num as number
       const env = await getEnv()
       const signer = getSigner(env.network.privateKeys, opts.keyIndex === undefined ? 0 : (opts.keyIndex as number))
       const factoryId = devnetDeployment.contracts.TokenPairFactory.contractInstance.contractId
       console.log(`ALPH token id: ${ALPH_TOKEN_ID}, address: ${addressFromContractId(ALPH_TOKEN_ID)}`)
-      const tokenInfos = await createTokens(signer, tokenNumber)
+      const tokenInfos = await createTokens(signer)
       const content = JSON.stringify(tokenInfos, null, 2)
       const filepath = path.join(process.cwd(), 'src', 'utils', 'devnet-token-list.json')
       fs.writeFileSync(filepath, content)

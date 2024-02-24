@@ -81,6 +81,7 @@ function AddPool() {
     try {
       setAddingPool(true)
       if (connectionStatus === 'connected' && explorerProvider !== undefined && tokenAInfo !== undefined && tokenBInfo !== undefined) {
+        console.log('creating pool...')
         const result = await createTokenPair(
           signer,
           explorerProvider,
@@ -92,6 +93,12 @@ function AddPool() {
         setTxId(result.txId)
         updateBalanceForTx(result.txId)
         setAddingPool(false)
+      }
+      else
+      {
+        setError(`something failed`)
+        setAddingPool(false)
+        console.error(`failed to add pool`)
       }
     } catch (error) {
       setError(`${error}`)
@@ -119,52 +126,53 @@ function AddPool() {
 
   return (
     <MainLayout>
+      <div className="mt-20"/>
       <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl text-white border-solid border-indigo-600 border-y border-x">
 
         <div className="space-y-4">
-          <label className="block text-lg">Add Pool</label>
+          <label className="text-xl font-medium">Add Pool</label>
 
-          <div className="relative">
-            <div className="p-4 overflow-hidden">
-              <WaitingForTxSubmission open={!!addingPool && !completed} text="Adding Pool"/>
-              <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Add Liquidity" onClick={redirectToAddLiquidity} />
-              {connectionStatus !== 'connected' ?
-                <div className="text-white">
-                  <p color="red" className="block text-xl font-bold text-red-600 error">
-                    Your wallet is not connected!
-                  </p>
+          <div className="relative p-4 overflow-hidden">
+            
+            <WaitingForTxSubmission open={!!addingPool && !completed} text="Adding Pool"/>
+            <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Add Liquidity" onClick={redirectToAddLiquidity} />
+            
+            {connectionStatus !== 'connected' ?
+              <div className="text-white">
+                <p color="red" className="block text-xl font-bold text-red-600 error">
+                  Your wallet is not connected!
+                </p>
 
-                  <p className="block text-md font-medium error">
-                    Use the "Connect Alephium" button in the top right, to connect your wallet.
-                  </p>
+                <p className="block text-md font-medium error">
+                  Use the "Connect Alephium" button in the top right, to connect your wallet.
+                </p>
                   
-                </div> : null
-              }
+              </div> : null
+            }
               
-              <div>
-                <Collapse in={!addingPool && !completed && connectionStatus === 'connected' }>
-                  {
-                    <>
-                      {tokenPairContent}
-                      <div className="spacer"/>
-                      {error ? (
-                        <p className="block text-md font-medium text-red-600 error">
-                          {error}
-                        </p>
-                      ) : null}
-                      <div className="spacer"/>
-                    </>
-                  }
-                  <div className="flex justify-center">
-                    {addPoolButton}
-                  </div>
+            <div>
+              <Collapse in={!addingPool && !completed && connectionStatus === 'connected' }>
+                {
+                  <>
+                    {tokenPairContent}
+                    <div className="spacer"/>
+                    {error ? (
+                      <p className="block text-md font-medium text-red-600 error">
+                        {error}
+                      </p>
+                    ) : null}
+                    <div className="spacer"/>
+                  </>
+                }
+                <div className="flex justify-center">
+                  {addPoolButton}
+                </div>
                   
-                </Collapse>
-              </div>
-
+              </Collapse>
             </div>
 
           </div>
+
         </div>
       
       </div>

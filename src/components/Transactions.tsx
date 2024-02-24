@@ -1,7 +1,10 @@
-import { Button, Collapse, Link, Typography } from "@mui/material";
+import { Button, Collapse, Typography } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/material/Icon";
 import { getExplorerLink } from "../utils/dex";
 import CircleLoader from "@/components/CircleLoader";
+import { TiTick } from "react-icons/ti";
+import Link from "next/link"
+
 
 interface TransactionSubmitProps {
   open: boolean
@@ -18,26 +21,18 @@ export function TransactionSubmitted({
 }: TransactionSubmitProps) {
 
   return <Collapse in={open}>
-    <>
-      <CheckCircleOutlineRoundedIcon
-        fontSize={"inherit"}
-        className="successIcon"
-      />
-      <Typography variant='h5'>Transaction Submitted</Typography>
-      <div className="spacer" />
-      <Link
-        target="_blank"
-        href={getExplorerLink(txId)}
-        rel="noreferrer"
-        variant='body2'
-      >
+    <div className="flex flex-col items-center justify-center">
+      <TiTick size={120}/>
+      <h2 className="text-xl font-bold tracking-wider">Transaction Submitted</h2>
+      <div className="mt-4" />
+      <Link href={getExplorerLink(txId)} className="underline text-md font-bold">
         View on Explorer
       </Link>
-      <div className="spacer"/>
-      <Button onClick={onClick} variant="contained" color="primary" size='large'>
+      <div className="mt-4"/>
+      <button onClick={onClick} className="w-6/12 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow text-md font-bold mt-4">
         {buttonText}
-      </Button>
-    </>
+      </button>
+    </div>
   </Collapse>
 }
 

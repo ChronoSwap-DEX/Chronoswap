@@ -1,32 +1,8 @@
 [
   {
-    "id": "f57ba83f7b828847faee2f612cf977d122e780e33fa4125f5c64abf0ad2ecb00",
-    "symbol": "TT-0",
-    "name": "TestToken0",
-    "decimals": 18
-  },
-  {
-    "id": "02f9436d8a3831b376a12939a59c9b676ca058ae29aa8c9f4b61c54840935400",
-    "symbol": "TT-1",
-    "name": "TestToken1",
-    "decimals": 18
-  },
-  {
-    "id": "150ecb0549371d6e4905d6fddb7acd9aaf8bafc115bff018c99b97f618ed0c00",
-    "symbol": "TT-2",
-    "name": "TestToken2",
-    "decimals": 18
-  },
-  {
-    "id": "dce584604c86d04416bf2262831df26b8c19bcd85c3dcba0142e0423a4e82200",
-    "symbol": "TT-3",
-    "name": "TestToken3",
-    "decimals": 18
-  },
-  {
-    "id": "4c324b2254cc6825c83d1b0336b522a752912296c85dcc3da46390cad1a12400",
-    "symbol": "TT-4",
-    "name": "TestToken4",
+    "id": "6024150727df1282c2aceb6bad43c829cfacac1f6f1d37a1fc505756e355cc00",
+    "symbol": "CHRON",
+    "name": "Chron",
     "decimals": 18
   }
 ]

@@ -60,7 +60,7 @@ function AddLiquidity() {
     setTxId(undefined)
     setAddingLiquidity(false)
     setError(undefined)
-    router.push('/addliquidity')
+    router.push('/swap')
   }
 
   const tokenABalance = useMemo(() => {
@@ -72,52 +72,39 @@ function AddLiquidity() {
   }, [balance, tokenBInfo])
 
   const sourceContent = (
-    <div>
-      <div className="inputRow">
-        <TokenSelectDialog
-          tokenId={tokenAInfo?.id}
-          counterpart={tokenBInfo?.id}
-          onChange={handleTokenAChange}
-          tokenBalances={balance} />
+      <div className="relative bg-gradient-to-br from-blue-950 to-indigo-950 rounded-lg">
+        
+        {tokenABalance ? (<label className="absolute top-0 left-0 ml-2 mt-2 text-sm text-gray-400"> {tokenAInfo?.symbol}: {tokenABalance} </label>) : null}
 
-        <NumberTextField
-          className="numberField"
-          value={tokenAInput !== undefined ? tokenAInput : ''}
-          onChange={handleTokenAAmountChange}
-          autoFocus={true}
-          InputProps={{ disableUnderline: true }}
-          disabled={!!addingLiquidity || !!completed}
-        />
+        <div className="flex p-1">
+          <NumberTextField value={tokenAInput !== undefined ? tokenAInput : ''} onChange={handleTokenAAmountChange} autoFocus={true} disabled={!!addingLiquidity || !!completed}/>
+          <TokenSelectDialog tokenId={tokenAInfo?.id} counterpart={tokenBInfo?.id} onChange={handleTokenAChange} tokenBalances={balance} />
+        </div>
         
       </div>
-      {tokenABalance ?
-        (<Typography className="balance">
-          Balance: {tokenABalance}
-        </Typography>) : null}
-    </div>
   );
   const targetContent = (
-    <div className="">
-      <div className="inputRow">
+      <div className="relative bg-gradient-to-br from-blue-950 to-indigo-950 rounded-lg">
+
+          {tokenBBalance ?
+          (<label className="absolute top-0 left-0 ml-2 mt-2 text-sm text-gray-400">
+            {tokenBInfo?.symbol}: {tokenBBalance}
+          </label>) : null}
+
+        <div className="flex p-1">
+        <NumberTextField
+          
+          value={tokenBInput !== undefined ? tokenBInput : ''}
+          onChange={handleTokenBAmountChange}
+          disabled={!!addingLiquidity || !!completed}/>
         <TokenSelectDialog
           tokenId={tokenBInfo?.id}
           counterpart={tokenAInfo?.id}
           onChange={handleTokenBChange}
-          tokenBalances={balance}
-        />
-        <NumberTextField
-          className="numberField"
-          value={tokenBInput !== undefined ? tokenBInput : ''}
-          onChange={handleTokenBAmountChange}
-          InputProps={{ disableUnderline: true }}
-          disabled={!!addingLiquidity || !!completed}
-        />
+          tokenBalances={balance}/>
+        </div>
+      
       </div>
-      {tokenBBalance ?
-        (<Typography className="balance">
-          Balance: {tokenBBalance}
-        </Typography>) : null}
-    </div>
   );
 
   const handleAddLiquidity = useCallback(async () => {
@@ -166,59 +153,60 @@ function AddLiquidity() {
     !addingLiquidity && !completed && 
     error === undefined
   const addLiquidityButton = (
-    <ButtonWithLoader
-      disabled={!readyToAddLiquidity}
-      onClick={handleAddLiquidity}
-      className={"w-6/12 py-3 bg-blue-800 hover:bg-blue-950 rounded-md text-md font-bold mt-4" + (!readyToAddLiquidity ? " " + "disabled" : "")}
-    >
+    <ButtonWithLoader disabled={!readyToAddLiquidity} onClick={handleAddLiquidity} className={"w-6/12 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow text-md font-bold mt-4" + (!readyToAddLiquidity ? " " + "disabled" : "")}>
       Add Liquidity
     </ButtonWithLoader>
   );
 
   return (
     <MainLayout>
+      <div className="mt-20"/>
       <div className="p-4 max-w-lg mx-auto bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl text-white border-solid border-indigo-600 border-y border-x" >
 
         <div className="space-y-4">
-        <label className="block text-lg">Add Liquidity</label>
+          <label className="text-xl font-medium">Add Liquidity</label>
 
-        <div className="relative">
-          <div className="p-4 overflow-hidden">
-            <WaitingForTxSubmission open={!!addingLiquidity && !completed}  text="Adding Liquidity" />
-          <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Swap Coins" onClick={redirectToSwap}/>
-          
-          {connectionStatus !== 'connected' ?
-            <div>
-              <Typography variant="h6" color="error" className={"error"}>
-                Your wallet is not connected
-              </Typography>
-            </div> : null
-          }
+          <div className="relative">
+            <div className="p-4 overflow-hidden">
+              <WaitingForTxSubmission open={!!addingLiquidity && !completed}  text="Adding Liquidity" />
+              <TransactionSubmitted open={!!completed} txId={txId!} buttonText="Swap Coins" onClick={redirectToSwap}/>
+            
+              {connectionStatus !== 'connected' ?
+                <div className="text-white">
+                  <p color="red" className="block text-xl font-bold text-red-600 error">
+                    Your wallet is not connected!
+                  </p>
 
-          <div>
-            <Collapse in={!addingLiquidity && !completed && connectionStatus === 'connected'}>
-              {
-                <>
-                  {sourceContent}
-                  <div className={"spacer"} />
-                  {targetContent}
-                  {error ? (
-                    <p className="block text-md font-medium text-red-600 error">
-                      {error}
-                    </p>
-                  ) : null}
-                  <div className={"spacer"} />
-                </>
+                  <p className="block text-md font-medium error">
+                    Use the "Connect Alephium" button in the top right, to connect your wallet.
+                  </p>
+                </div> : null
               }
-              <AddLiquidityDetailsCard details={addLiquidityDetails} slippage={slippage === 'auto' ? DEFAULT_SLIPPAGE : slippage}></AddLiquidityDetailsCard>
-              <div className="flex justify-center">
-                {addLiquidityButton}
+
+              <div>
+              <Collapse in={!addingLiquidity && !completed && connectionStatus === 'connected'}>
+                {
+                  <>
+                    {sourceContent}
+                    <div className={"spacer"} />
+                    {targetContent}
+                    {error ? (
+                      <p className="block text-md font-medium text-red-600 error">
+                        {error}
+                      </p>
+                    ) : null}
+                    <div className={"spacer"} />
+                  </>
+                }
+                <AddLiquidityDetailsCard details={addLiquidityDetails} slippage={slippage === 'auto' ? DEFAULT_SLIPPAGE : slippage}></AddLiquidityDetailsCard>
+                <div className="flex justify-center">
+                  {addLiquidityButton}
+                </div>
+                
+              </Collapse>
               </div>
-              
-            </Collapse>
+            </div>
           </div>
-          </div>
-        </div>
 
         </div>
         

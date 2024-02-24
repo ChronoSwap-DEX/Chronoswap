@@ -108,7 +108,7 @@ export const CustomSidebar: React.FC = () => {
 
           <Sidebar.Collapse icon={MdWaterDrop} label="Liquidity">
             <Sidebar.Item as={Link} icon={MdAddCircle} href="/addLiquidity">Add Liquidity</Sidebar.Item>
-            <Sidebar.Item as={Link} icon={MdOutlineRemoveCircle} href="/remove-liquidity">Remove Liquidity</Sidebar.Item>
+            <Sidebar.Item as={Link} icon={MdOutlineRemoveCircle} href="/removeLiquidity">Remove Liquidity</Sidebar.Item>
           </Sidebar.Collapse>
 
           <Sidebar.Collapse icon={MdWater} label="Pools">
