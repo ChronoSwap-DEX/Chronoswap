@@ -16,6 +16,7 @@ import { bigIntToString, TokenList } from "../utils/dex";
 import { TokenInfo } from '@alephium/token-list'
 import { MyDialog } from "@/components/MyDialog";
 import Image from "next/image"
+import { MdClose } from "react-icons/md";
 
 interface TokenSelectProps {
   tokenId: string | undefined
@@ -41,17 +42,19 @@ const TokenOptions = ({
     onSelect(tokenInfo);
     close();
   }, [tokenInfo, onSelect, close]);
+  
+  const typographyProps = {
+    className: "text-white",
+    fontFamily: 'Poppins, sans-serif'
+  };
 
   return (
     <ListItem button onClick={handleClick} key={tokenInfo.id}>
       <ListItemIcon>
-        <img
-          src={tokenInfo.logoURI}
-          alt={tokenInfo.name}
-          className="icon"
-        />
+        <img src={tokenInfo.logoURI} alt={tokenInfo.name} className="icon"/>
       </ListItemIcon>
-      <ListItemText primary={tokenInfo.name} secondary={tokenInfo.symbol}/>
+      <ListItemText primaryTypographyProps={typographyProps} primary={tokenInfo.name} 
+                    secondaryTypographyProps={typographyProps} secondary={tokenInfo.symbol} />
       <ListItemSecondaryAction>
         {balance === undefined ? '0' : bigIntToString(balance, tokenInfo.decimals)}
       </ListItemSecondaryAction>
@@ -113,15 +116,15 @@ export default function TokenSelectDialog({
       </button>
 
       <MyDialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-        <DialogTitle>
+        <DialogTitle className=" bg-blue-950 text-white">
           <div className="flexTitle">
             <div>Select a token</div>
             <IconButton onClick={handleClose}>
-              <CloseIcon />
+              <MdClose className="text-white"/>
             </IconButton>
           </div>
         </DialogTitle>
-        <List>{availableTokens}</List>
+        <List className="bg-blue-950  text-white">{availableTokens}</List>
       </MyDialog>
     </>
   );
