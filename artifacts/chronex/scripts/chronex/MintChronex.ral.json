@@ -1,5 +1,5 @@
 {
-  "version": "v2.8.3",
+  "version": "v2.8.4",
   "name": "MintChronex",
   "bytecodeTemplate": "0101030000000ab4{1}13c3038d7ea4c68000a7{1}{2}0e0c{0}0106",
   "fieldsSig": {

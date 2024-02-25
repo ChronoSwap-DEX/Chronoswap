@@ -468,7 +468,7 @@ export async function mintChonrex(
     
     return await MintChronex.execute(SignerProvider, {
       initialFields: {
-        chronex: "ee7ba3a1aa17d2496fb111232977289859a60ce790e1c431e04301e8f4eeae00",
+        chronex: "72a01db41965a040a8ed6800cbc7fdac60039c5eca72dc3d1399bd7338dbef00",
         to: to ,
         amount: BigInt(amount)
       },
