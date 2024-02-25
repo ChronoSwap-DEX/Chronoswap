@@ -1,0 +1,5 @@
+TxScript MintXToken(liquidStaking: LiquidStaking, amount: U256) {
+    let tokenId = liquidStaking.getTokenId()
+
+    liquidStaking.mint{callerAddress!() -> tokenId: amount}(amount)
+}

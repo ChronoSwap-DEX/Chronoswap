@@ -1,0 +1,3 @@
+TxScript DestroyPresale(presale: ChronexPresale, balanceTo: Address) {
+    presale.destroy(balanceTo)
+}

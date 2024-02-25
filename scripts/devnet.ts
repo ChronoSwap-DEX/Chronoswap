@@ -17,6 +17,7 @@ import { TokenInfo } from '@alephium/token-list'
 import * as fs from 'fs'
 import * as path from 'path'
 import { waitTxConfirmed } from './utils'
+import { Address, callMethod } from "@alephium/web3";
 
 const oneAlph = 10n ** 18n
 

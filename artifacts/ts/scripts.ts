@@ -13,16 +13,32 @@ import {
 } from "@alephium/web3";
 import { default as AddLiquidityScriptJson } from "../scripts/AddLiquidity.ral.json";
 import { default as BurnScriptJson } from "../scripts/Burn.ral.json";
+import { default as BurnXTokenScriptJson } from "../chronex/scripts/liquid_staking/BurnXToken.ral.json";
+import { default as BuyChronexScriptJson } from "../chronex/scripts/presale/BuyChronex.ral.json";
+import { default as ClaimRewardsScriptJson } from "../chronex/scripts/staking/ClaimRewards.ral.json";
+import { default as ClaimVestedTokensScriptJson } from "../chronex/scripts/vesting_schedule/ClaimVestedTokens.ral.json";
 import { default as CollectFeeScriptJson } from "../scripts/CollectFee.ral.json";
 import { default as CreatePairScriptJson } from "../scripts/CreatePair.ral.json";
+import { default as CreateVestingScheduleScriptJson } from "../chronex/scripts/vesting_schedule/CreateVestingSchedule.ral.json";
+import { default as DepositChronexScriptJson } from "../chronex/scripts/presale/DepositChronex.ral.json";
+import { default as DestroyPresaleScriptJson } from "../chronex/scripts/presale/DestroyPresale.ral.json";
 import { default as EnableFeeCollectorScriptJson } from "../scripts/EnableFeeCollector.ral.json";
 import { default as GetTokenScriptJson } from "../test/GetToken.ral.json";
 import { default as MintScriptJson } from "../scripts/Mint.ral.json";
+import { default as MintChronexScriptJson } from "../chronex/scripts/chronex/MintChronex.ral.json";
+import { default as MintXTokenScriptJson } from "../chronex/scripts/liquid_staking/MintXToken.ral.json";
 import { default as RemoveLiquidityScriptJson } from "../scripts/RemoveLiquidity.ral.json";
 import { default as SetFeeCollectorFactoryScriptJson } from "../scripts/SetFeeCollectorFactory.ral.json";
+import { default as StakeScriptJson } from "../chronex/scripts/staking/Stake.ral.json";
 import { default as SwapScriptJson } from "../scripts/Swap.ral.json";
 import { default as SwapMaxInScriptJson } from "../scripts/SwapMaxIn.ral.json";
 import { default as SwapMinOutScriptJson } from "../scripts/SwapMinOut.ral.json";
+import { default as TopUpRewardsScriptJson } from "../chronex/scripts/liquid_staking/TopUpRewards.ral.json";
+import { default as UnstakeScriptJson } from "../chronex/scripts/staking/Unstake.ral.json";
+import { default as UpgradeLiquidStakingScriptJson } from "../chronex/scripts/liquid_staking/UpgradeLiquidStaking.ral.json";
+import { default as UpgradePresaleScriptJson } from "../chronex/scripts/presale/UpgradePresale.ral.json";
+import { default as UpgradeStakingScriptJson } from "../chronex/scripts/staking/UpgradeStaking.ral.json";
+import { default as WithdrawFeesScriptJson } from "../scripts/WithdrawFees.ral.json";
 
 export const AddLiquidity = new ExecutableScript<{
   sender: Address;
@@ -39,6 +55,20 @@ export const Burn = new ExecutableScript<{
   sender: Address;
   liquidity: bigint;
 }>(Script.fromJson(BurnScriptJson));
+export const BurnXToken = new ExecutableScript<{
+  liquidStaking: HexString;
+  xTokenAmount: bigint;
+}>(Script.fromJson(BurnXTokenScriptJson));
+export const BuyChronex = new ExecutableScript<{
+  presale: HexString;
+  amount: bigint;
+}>(Script.fromJson(BuyChronexScriptJson));
+export const ClaimRewards = new ExecutableScript<{ staking: HexString }>(
+  Script.fromJson(ClaimRewardsScriptJson)
+);
+export const ClaimVestedTokens = new ExecutableScript<{ schedule: HexString }>(
+  Script.fromJson(ClaimVestedTokensScriptJson)
+);
 export const CollectFee = new ExecutableScript<{ feeCollector: HexString }>(
   Script.fromJson(CollectFeeScriptJson)
 );
@@ -49,6 +79,21 @@ export const CreatePair = new ExecutableScript<{
   tokenAId: HexString;
   tokenBId: HexString;
 }>(Script.fromJson(CreatePairScriptJson));
+export const CreateVestingSchedule = new ExecutableScript<{
+  factory: HexString;
+  tokenId: HexString;
+  amount: bigint;
+  beneficiary: Address;
+  duration: bigint;
+}>(Script.fromJson(CreateVestingScheduleScriptJson));
+export const DepositChronex = new ExecutableScript<{
+  presale: HexString;
+  amount: bigint;
+}>(Script.fromJson(DepositChronexScriptJson));
+export const DestroyPresale = new ExecutableScript<{
+  presale: HexString;
+  balanceTo: Address;
+}>(Script.fromJson(DestroyPresaleScriptJson));
 export const EnableFeeCollector = new ExecutableScript<{
   tokenPairFactory: HexString;
   tokenPair: HexString;
@@ -64,6 +109,15 @@ export const Mint = new ExecutableScript<{
   amount0: bigint;
   amount1: bigint;
 }>(Script.fromJson(MintScriptJson));
+export const MintChronex = new ExecutableScript<{
+  chronex: HexString;
+  to: Address;
+  amount: bigint;
+}>(Script.fromJson(MintChronexScriptJson));
+export const MintXToken = new ExecutableScript<{
+  liquidStaking: HexString;
+  amount: bigint;
+}>(Script.fromJson(MintXTokenScriptJson));
 export const RemoveLiquidity = new ExecutableScript<{
   sender: Address;
   router: HexString;
@@ -77,6 +131,10 @@ export const SetFeeCollectorFactory = new ExecutableScript<{
   tokenPairFactory: HexString;
   feeCollectorFactory: HexString;
 }>(Script.fromJson(SetFeeCollectorFactoryScriptJson));
+export const Stake = new ExecutableScript<{
+  staking: HexString;
+  amount: bigint;
+}>(Script.fromJson(StakeScriptJson));
 export const Swap = new ExecutableScript<{
   tokenPair: HexString;
   sender: Address;
@@ -104,3 +162,27 @@ export const SwapMinOut = new ExecutableScript<{
   amountOutMin: bigint;
   deadline: bigint;
 }>(Script.fromJson(SwapMinOutScriptJson));
+export const TopUpRewards = new ExecutableScript<{
+  liquidStaking: HexString;
+  amount: bigint;
+}>(Script.fromJson(TopUpRewardsScriptJson));
+export const Unstake = new ExecutableScript<{
+  staking: HexString;
+  amount: bigint;
+}>(Script.fromJson(UnstakeScriptJson));
+export const UpgradeLiquidStaking = new ExecutableScript<{
+  staking: HexString;
+  newBytecode: HexString;
+}>(Script.fromJson(UpgradeLiquidStakingScriptJson));
+export const UpgradePresale = new ExecutableScript<{
+  presale: HexString;
+  newBytecode: HexString;
+}>(Script.fromJson(UpgradePresaleScriptJson));
+export const UpgradeStaking = new ExecutableScript<{
+  staking: HexString;
+  newBytecode: HexString;
+}>(Script.fromJson(UpgradeStakingScriptJson));
+export const WithdrawFees = new ExecutableScript<{
+  feeCollector: HexString;
+  amount: bigint;
+}>(Script.fromJson(WithdrawFeesScriptJson));

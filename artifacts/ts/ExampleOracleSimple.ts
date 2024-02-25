@@ -153,7 +153,7 @@ export const ExampleOracleSimple = new Factory(
   Contract.fromJson(
     ExampleOracleSimpleContractJson,
     "",
-    "77c214087d18764740b2479fc13342959a21a02a36977c0d998667644200071a"
+    "52a275cfc409ff8fce483c7f9af7242922b40286e1e3174a129476a459dc67ac"
   )
 );
 

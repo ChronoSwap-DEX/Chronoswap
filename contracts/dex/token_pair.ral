@@ -34,12 +34,29 @@ Contract TokenPair(
     return reserve0, reserve1
   }
 
+  @using(checkExternalCaller = false)
+  fn pairName_() -> ByteVec {
+    let alph_ = #414c5048
+    let mut tokenA = alph_
+    let mut tokenB = alph_
+
+    if (token0Id != ALPH) {
+        tokenA = IFungibleToken(token0Id).getSymbol()
+    }
+
+    if (token1Id != ALPH) {
+        tokenB = IFungibleToken(token1Id).getSymbol()
+    }
+
+    return tokenA ++ tokenB
+  }
+
   pub fn getSymbol() -> ByteVec {
-    return #414c50482d444558 // ALPH-DEX
+    return pairName_()
   }
 
   pub fn getName() -> ByteVec {
-    return #414c50482d444558 // ALPH-DEX
+    return pairName_()
   }
 
   pub fn getDecimals() -> U256 {
@@ -90,7 +107,7 @@ Contract TokenPair(
         let rootKLast = sqrt(kLast)
         if (rootK > rootKLast) {
           let numerator = totalSupply * (rootK - rootKLast)
-          let denominator = rootK * 5 + rootKLast
+          let denominator = rootK + rootKLast
           fee = numerator / denominator
           totalSupply = totalSupply + fee
         }

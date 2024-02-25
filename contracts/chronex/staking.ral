@@ -1,0 +1,118 @@
+Contract Staking(
+    tokenId: ByteVec,
+    rewardsTokenId: ByteVec,
+    stakingAccountTemplateId: ByteVec,
+    mut rewardRate: U256,
+    mut totalAmountStaked: U256,
+    mut rewardPerTokenStored: U256,
+    mut lastUpdateTime: U256,
+    mut owner_: Address,
+    mut paused_: Bool
+) extends Constants(), StakingAccountFactory(tokenId, rewardsTokenId, stakingAccountTemplateId), Pauseable(owner_, paused_) {
+    pub fn getTokenId() -> ByteVec {
+        return tokenId
+    }
+
+    pub fn getRewardsTokenId() -> ByteVec {
+        return rewardsTokenId
+    }
+
+    fn updateStakerReward(account: StakingAccount) -> () {
+        updateReward()
+        let reward = earned(account)
+
+        account.setRewards(reward, rewardPerTokenStored)
+    }
+
+    @using(updateFields = true)
+    fn updateReward() -> () {
+        rewardPerTokenStored = calculateRewardPerToken()
+        lastUpdateTime = blockTimeStamp!()
+    }
+
+    fn earned(acc: StakingAccount) -> U256 {
+        let staked = acc.getAmountStaked()
+        let rewardPerTokenPaid = acc.getRewardPerTokenPaid()
+        let currentRewardPerToken = calculateRewardPerToken()
+        let pastRewards = acc.getRewards()
+
+        let earnedRewards = ((staked * (currentRewardPerToken - rewardPerTokenPaid)) / 1e18) + pastRewards
+
+        return earnedRewards
+    }
+
+    fn calculateRewardPerToken() -> U256 {
+        if (totalAmountStaked == 0) {
+            return rewardPerTokenStored
+        }
+
+        return rewardPerTokenStored + ((blockTimeStamp!() - lastUpdateTime) * rewardRate * 1e18) / totalAmountStaked
+    }
+
+    @using(preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn stake(amount: U256) -> () {
+        whenNotPaused()
+
+        let staker = callerAddress!()
+
+        if (stakingAccountExists(staker)) {
+            let stakingAccount = getStakingAccount(staker)
+            updateStakerReward(stakingAccount)
+
+            stakingAccount.stake{staker -> tokenId: amount}(amount)
+        } else {
+            updateReward()
+            createStakingAccount{staker -> ALPH: 1 alph, tokenId: amount}(staker, amount, rewardPerTokenStored)
+        }
+        
+        totalAmountStaked = totalAmountStaked + amount
+    }
+
+    @using(updateFields = true, checkExternalCaller = false)
+    pub fn unstake(amount: U256) -> () {
+        whenNotPaused()
+
+        let staker = callerAddress!()
+
+        let stakingAccount = getStakingAccount(staker)
+
+        updateStakerReward(stakingAccount)
+        sendRewards(stakingAccount)
+
+        stakingAccount.unstake(amount)
+        totalAmountStaked = totalAmountStaked - amount
+    }
+
+    @using(assetsInContract = true)
+    fn sendRewards(account: StakingAccount) -> () {
+        let self = selfAddress!()
+        let stakingRewards = account.getRewards()
+
+        account.claimRewards{self -> rewardsTokenId: stakingRewards}()
+    }
+
+    @using(checkExternalCaller = false)
+    pub fn claimRewards() -> () {
+        whenNotPaused()
+
+        let staker = callerAddress!()
+
+        let stakingAccount = getStakingAccount(staker)
+
+        updateStakerReward(stakingAccount)
+        sendRewards(stakingAccount)
+    }
+
+    @using(updateFields = true)
+    pub fn setRewardRate(rate: U256) -> () {
+        onlyOwner(callerAddress!())
+
+        rewardRate = rate
+    }
+
+    pub fn upgrade(newBytecode: ByteVec) -> () {
+        onlyOwner(callerAddress!())
+
+        migrate!(newBytecode)
+    }
+}

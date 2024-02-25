@@ -1,0 +1,4 @@
+TxScript MintChronex(chronex: ChronexToken, to: Address, amount: U256) {
+    transferToken!(callerAddress!(), to, ALPH, dustAmount!())
+    chronex.mint(to, amount)
+}

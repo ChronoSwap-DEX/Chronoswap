@@ -1,7 +1,7 @@
 {
   "version": "v2.8.3",
   "name": "Burn",
-  "bytecodeTemplate": "0101030000000c{1}{0}{2}a3{1}{2}0e0e{0}010f1818",
+  "bytecodeTemplate": "0101030000000c{1}{0}{2}a3{1}{2}0e0e{0}01101818",
   "fieldsSig": {
     "names": [
       "tokenPair",

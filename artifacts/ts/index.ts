@@ -2,13 +2,22 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export * from "./ChronexPresale";
+export * from "./ChronexToken";
 export * from "./ExampleOracleSimple";
 export * from "./FeeCollectorFactoryImpl";
 export * from "./FeeCollectorPerTokenPairImpl";
 export * from "./FullMathTest";
+export * from "./LiquidStaking";
 export * from "./MathTest";
+export * from "./PauseableTest";
+export * from "./PermissionsTest";
 export * from "./Router";
+export * from "./Staking";
+export * from "./StakingAccount";
 export * from "./TestToken";
 export * from "./TokenPair";
 export * from "./TokenPairFactory";
+export * from "./VestingSchedule";
+export * from "./VestingScheduleFactory";
 export * from "./scripts";

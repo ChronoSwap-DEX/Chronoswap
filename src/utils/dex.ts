@@ -13,7 +13,7 @@ import {
 import { PollingInterval, network, networkId } from "./consts"
 import BigNumber from "bignumber.js"
 import { parseUnits } from "ethers/lib/utils";
-import { SwapMaxIn, SwapMinOut, TokenPair as TokenPairContract, AddLiquidity, RemoveLiquidity, CreatePair } from "../../artifacts/ts"
+import { SwapMaxIn, SwapMinOut, TokenPair as TokenPairContract, AddLiquidity, RemoveLiquidity, CreatePair, MintChronex } from "../../artifacts/ts"
 import { genLogo } from "./avatar_images";
 import { mainnetTokensMetadata, testnetTokensMetadata, TokenInfo, ALPH as ALPHInfo } from "@alephium/token-list";
 import { default as devnetTokenList } from './devnet-token-list.json'
@@ -459,6 +459,21 @@ export async function addLiquidity(
   })
   await waitTxSubmitted(explorerProvider, result.txId)
   return result
+}
+
+export async function mintChonrex(
+  SignerProvider: SignerProvider,
+  amount: string,
+  to: string,): Promise<SignExecuteScriptTxResult> {
+    
+    return await MintChronex.execute(SignerProvider, {
+      initialFields: {
+        chronex: "ee7ba3a1aa17d2496fb111232977289859a60ce790e1c431e04301e8f4eeae00",
+        to: to ,
+        amount: BigInt(amount)
+      },
+      attoAlphAmount: DUST_AMOUNT
+    })
 }
 
 export interface RemoveLiquidityDetails {

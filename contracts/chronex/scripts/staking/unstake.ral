@@ -1,0 +1,3 @@
+TxScript Unstake(staking: Staking, amount: U256) {
+    staking.unstake(amount)
+}

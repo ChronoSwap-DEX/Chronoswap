@@ -1,0 +1,171 @@
+import "std/fungible_token_interface"
+
+Contract LiquidStaking(
+    tokenId: ByteVec,
+    symbol: ByteVec,
+    name: ByteVec,
+    mut inflationPool: U256,
+    mut inflationRate: U256, // Amount of tokens that will be used from inflation pool
+    mut gainPerMillisecond: U256, // Percentage of rewardPool to be paid as a reward each millisecond where 1e18 is 100% of the pool
+    mut updatedAt: U256,
+    mut currentXTokenPrice: U256,
+    mut rewardPool: U256,
+    mut totalSupply: U256,
+    mut owner_: Address,
+    mut paused_: Bool
+) extends Pauseable(owner_, paused_) implements IFungibleToken {
+    event Mint(sender: Address, amount: U256, newSupply: U256)
+    event Burn(sender: Address, amount: U256, newSupply: U256)
+    event PriceChanged(newPrice: U256)
+
+    fn getCurrentRewardPerXToken() -> U256 {
+        if (totalSupply == 0) {
+            return 0
+        }
+
+        let elapsed = blockTimeStamp!() - updatedAt
+        let projectedReward = gainPerMillisecond * rewardPool * elapsed / totalSupply
+        let reward = if (projectedReward > rewardPool) rewardPool else projectedReward
+
+        return reward
+    }
+
+    fn getCurrentInflationPerXToken() -> U256 {
+        if (totalSupply == 0 || inflationPool == 0) {
+            return 0
+        }
+
+        let elapsed = blockTimeStamp!() - updatedAt
+        let projectedInflation = inflationRate * 1e18 * elapsed / totalSupply
+
+        let inflation = if (projectedInflation > inflationPool) inflationPool else projectedInflation
+
+        return inflation
+    }
+
+    pub fn getCurrentPrice() -> U256 {
+        if (totalSupply == 0) {
+            return currentXTokenPrice
+        }
+
+        let reward = getCurrentRewardPerXToken()
+        let inflation = getCurrentInflationPerXToken()
+
+        let currentPrice = currentXTokenPrice + reward + inflation
+        return currentPrice
+    }
+
+    @using(updateFields = true)
+    fn updatePrice() -> () {
+        let newPrice = getCurrentPrice()
+        let reward = getCurrentRewardPerXToken()
+        let inflation = getCurrentInflationPerXToken()
+
+        if (rewardPool <= reward) {
+            rewardPool = 0
+        } else {
+            rewardPool = rewardPool - reward
+        }
+
+        if (inflationPool <= inflation) {
+            inflationPool = 0
+        } else {
+            inflationPool = inflationPool - inflation
+        }
+        
+        currentXTokenPrice = newPrice
+        updatedAt = blockTimeStamp!()
+
+        emit PriceChanged(currentXTokenPrice)
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn mint(amount: U256) -> () {
+        whenNotPaused()
+        updatePrice()
+        let xTokenAmount = amount * 1e18 / currentXTokenPrice
+        
+        transferTokenToSelf!(callerAddress!(), tokenId, amount)
+        transferTokenFromSelf!(callerAddress!(), selfTokenId!(), xTokenAmount)
+
+        totalSupply = totalSupply + xTokenAmount
+
+        emit Mint(callerAddress!(), xTokenAmount, totalSupply)
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn burn(xTokenAmount: U256) -> () {
+        whenNotPaused()
+        updatePrice()
+        let tokenAmount = xTokenAmount * currentXTokenPrice / 1e18
+
+        transferTokenToSelf!(callerAddress!(), selfTokenId!(), xTokenAmount)
+        transferTokenFromSelf!(callerAddress!(), tokenId, tokenAmount)
+
+        totalSupply = totalSupply - xTokenAmount
+
+        emit Burn(callerAddress!(), xTokenAmount, totalSupply)
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn topUpRewards(amount: U256) -> () {
+        whenNotPaused()
+        updatePrice()
+
+        transferTokenToSelf!(callerAddress!(), tokenId, amount)
+
+        rewardPool = rewardPool + amount
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn topUpInflationPool(amount: U256) -> () {
+        whenNotPaused()
+        updatePrice()
+
+        transferTokenToSelf!(callerAddress!(), tokenId, amount)
+
+        inflationPool = inflationPool + amount
+    }
+
+    @using(updateFields = true)
+    pub fn setGainPerMillisecond(newGainPerMillisecond: U256) -> () {
+        onlyOwner(callerAddress!())
+        updatePrice()
+
+        gainPerMillisecond = newGainPerMillisecond
+    }
+
+    @using(updateFields = true)
+    pub fn setInflationRate(newInflationRate: U256) -> () {
+        onlyOwner(callerAddress!())
+        updatePrice()
+
+        inflationRate = newInflationRate
+    }
+
+    pub fn getTokenId() -> ByteVec {
+        return tokenId
+    }
+
+    pub fn getSymbol() -> ByteVec {
+        return symbol
+    }
+
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    pub fn getDecimals() -> U256 {
+        return 18
+    }
+
+    pub fn getTotalSupply() -> U256 {
+        return totalSupply
+    }
+
+    pub fn upgrade(newBytecode: ByteVec) -> () {
+        onlyOwner(callerAddress!())
+
+        migrate!(newBytecode)
+    }
+}

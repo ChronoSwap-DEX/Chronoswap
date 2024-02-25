@@ -1,0 +1,5 @@
+TxScript TopUpRewards(liquidStaking: LiquidStaking, amount: U256) {
+    let tokenId = liquidStaking.getTokenId()
+
+    liquidStaking.topUpRewards{callerAddress!() -> tokenId: amount}(amount)
+}

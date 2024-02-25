@@ -1,0 +1,31 @@
+{
+  "version": "v2.8.3",
+  "name": "MintXToken",
+  "bytecodeTemplate": "0101030001000e0c0d{0}01131700b41600{1}a3{1}0d0c{0}010d",
+  "fieldsSig": {
+    "names": [
+      "liquidStaking",
+      "amount"
+    ],
+    "types": [
+      "ByteVec",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "functions": [
+    {
+      "name": "main",
+      "usePreapprovedAssets": true,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ]
+}

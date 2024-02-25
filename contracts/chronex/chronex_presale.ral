@@ -1,0 +1,99 @@
+Contract ChronexPresale (
+    chronexToken: ByteVec,
+    mut tokensForSale: U256,
+    mut alphPerToken: U256,
+    mut saleOpen: Bool,
+    mut tokensSold: U256,
+    mut owner_: Address
+) extends Permissions(owner_) {
+    enum ErrorCodes {
+        SaleNotOpen = 0
+        NotEnoughTokens = 1
+    }
+
+    pub fn getChronexTokenId() -> ByteVec {
+        return chronexToken
+    }
+
+    pub fn getTokensLeft() -> U256 {
+        return tokensForSale - tokensSold
+    }
+
+    pub fn getAlphPerToken() -> U256 {
+        return alphPerToken
+    }
+
+    pub fn getSaleOpen() -> Bool {
+        return saleOpen
+    }
+
+    @using(updateFields = true, assetsInContract = true, preapprovedAssets = true)
+    pub fn depositChronex(amount: U256) -> () {
+        onlyOwner(callerAddress!())
+
+        tokensForSale = tokensForSale + amount
+        saleOpen = true
+
+        transferTokenToSelf!(callerAddress!(), chronexToken, amount)
+    }
+
+    @using(updateFields = true)
+    pub fn setSaleOpen(open: Bool) -> () {
+        onlyOwner(callerAddress!())
+        saleOpen = open
+    }
+
+    @using(updateFields = true)
+    pub fn setAlphPerToken(apt: U256) -> () {
+        onlyOwner(callerAddress!())
+        alphPerToken = apt
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn buy(amount: U256) -> () {
+        assert!(saleOpen, ErrorCodes.SaleNotOpen)
+        assert!(getTokensLeft() >= amount, ErrorCodes.NotEnoughTokens)
+
+        let totalPrice = amount * alphPerToken / 1e18
+        transferTokenToSelf!(callerAddress!(), ALPH, totalPrice)
+
+        tokensSold = tokensSold + amount
+
+        if (tokensSold == tokensForSale) {
+            saleOpen = false
+        }
+
+        transferTokenFromSelf!(callerAddress!(), chronexToken, amount)
+    }
+
+    @using(assetsInContract = true)
+    fn withdrawToken_(caller: Address, tokenId: ByteVec, amount: U256, sendTo: Address) -> () {
+        onlyOwner(caller)
+
+        transferTokenFromSelf!(sendTo, tokenId, amount)
+    }
+
+    pub fn withdrawAlph(amount: U256, sendTo: Address) -> () {
+        withdrawToken_(callerAddress!(), ALPH, amount, sendTo)
+    }
+
+    @using(updateFields = true)
+    pub fn withdrawChronex(amount: U256, sendTo: Address) -> () {
+        withdrawToken_(callerAddress!(), chronexToken, amount, sendTo)
+
+        tokensForSale = tokensForSale - amount
+    }
+
+    @using(assetsInContract = true)
+    pub fn destroy(remainingBalancesTo: Address) -> () {
+        onlyOwner(callerAddress!())
+
+        destroySelf!(remainingBalancesTo)
+    }
+
+    pub fn upgrade(newBytecode: ByteVec) -> () {
+        onlyOwner(callerAddress!())
+
+        migrate!(newBytecode)
+    }
+}

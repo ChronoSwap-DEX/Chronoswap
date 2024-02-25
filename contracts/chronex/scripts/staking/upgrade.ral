@@ -1,0 +1,3 @@
+TxScript UpgradeStaking(staking: Staking, newBytecode: ByteVec) {
+    staking.upgrade(newBytecode)
+}

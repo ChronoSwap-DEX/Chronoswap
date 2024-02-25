@@ -1,0 +1,5 @@
+TxScript BurnXToken(liquidStaking: LiquidStaking, xTokenAmount: U256) {
+    let tokenId = tokenId!(liquidStaking)
+
+    liquidStaking.burn{callerAddress!() -> tokenId: xTokenAmount}(xTokenAmount)
+}

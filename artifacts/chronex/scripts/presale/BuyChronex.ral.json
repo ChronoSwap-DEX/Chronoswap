@@ -1,0 +1,31 @@
+{
+  "version": "v2.8.3",
+  "name": "BuyChronex",
+  "bytecodeTemplate": "010103000200130c0d{0}01041700{1}16002c13c40de0b6b3a76400002d1701b41601a2{1}0d0c{0}0109",
+  "fieldsSig": {
+    "names": [
+      "presale",
+      "amount"
+    ],
+    "types": [
+      "ByteVec",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "functions": [
+    {
+      "name": "main",
+      "usePreapprovedAssets": true,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ]
+}

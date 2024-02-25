@@ -1,0 +1,3 @@
+TxScript UpgradeLiquidStaking(staking: LiquidStaking, newBytecode: ByteVec) {
+    staking.upgrade(newBytecode)
+}

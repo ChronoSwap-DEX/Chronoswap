@@ -224,6 +224,11 @@ class Factory extends ContractFactory<
     ): Promise<TestContractResult<[bigint, bigint]>> => {
       return testMethod(this, "getReserves", params);
     },
+    pairName_: async (
+      params: Omit<TestContractParams<TokenPairTypes.Fields, never>, "testArgs">
+    ): Promise<TestContractResult<HexString>> => {
+      return testMethod(this, "pairName_", params);
+    },
     getBlockTimeStampLast: async (
       params: Omit<TestContractParams<TokenPairTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
@@ -304,7 +309,7 @@ export const TokenPair = new Factory(
   Contract.fromJson(
     TokenPairContractJson,
     "",
-    "4a98763809adb6e899e3e7864e6d5dcb60c6fd0806f1264c3596b482021035f2"
+    "0ba23e4d958bc08a84958516f398b18390a393e91d4952b9816864565388a596"
   )
 );
 

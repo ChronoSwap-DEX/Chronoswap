@@ -4,30 +4,48 @@
 
 import { Contract, ContractFactory } from "@alephium/web3";
 import {
+  ChronexPresale,
+  ChronexToken,
   ExampleOracleSimple,
   FeeCollectorFactoryImpl,
   FeeCollectorPerTokenPairImpl,
   FullMathTest,
+  LiquidStaking,
   MathTest,
+  PauseableTest,
+  PermissionsTest,
   Router,
+  Staking,
+  StakingAccount,
   TestToken,
   TokenPair,
   TokenPairFactory,
+  VestingSchedule,
+  VestingScheduleFactory,
 } from ".";
 
 let contracts: ContractFactory<any>[] | undefined = undefined;
 export function getContractByCodeHash(codeHash: string): Contract {
   if (contracts === undefined) {
     contracts = [
+      ChronexPresale,
+      ChronexToken,
       ExampleOracleSimple,
       FeeCollectorFactoryImpl,
       FeeCollectorPerTokenPairImpl,
       FullMathTest,
+      LiquidStaking,
       MathTest,
+      PauseableTest,
+      PermissionsTest,
       Router,
+      Staking,
+      StakingAccount,
       TestToken,
       TokenPair,
       TokenPairFactory,
+      VestingSchedule,
+      VestingScheduleFactory,
     ];
   }
   const c = contracts.find(

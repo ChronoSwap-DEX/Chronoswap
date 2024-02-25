@@ -1,0 +1,42 @@
+Contract VestingScheduleFactory(
+    vestingScheduleTemplateId: ByteVec,
+    mut owner_: Address
+) extends Permissions(owner_) {
+    event VestingScheduleCreated(schedule: ByteVec, token: ByteVec, beneiciary: Address, amount: U256, start: U256, duration: U256)
+
+    enum ErrorCodes {
+        InvalidDuration = 0
+        InvalidAmount = 1
+    }
+
+    @using(preapprovedAssets = true)
+    pub fn createSchedule(
+        tokenId: ByteVec,
+        amount: U256,
+        beneficiary: Address,
+        duration: U256
+    ) -> () {
+        onlyOwner(callerAddress!())
+
+        assert!(duration > 0, ErrorCodes.InvalidDuration)
+        assert!(amount > 0, ErrorCodes.InvalidAmount)
+
+        let start = blockTimeStamp!()
+        let (encodedImmFields, encodedMutFields) = VestingSchedule.encodeFields!(tokenId, amount, beneficiary, start, duration, 0)
+        
+        let scheduleId = copyCreateSubContract!{callerAddress!() -> ALPH: 1 alph, tokenId: amount}(
+            encodeToByteVec!(beneficiary),
+            vestingScheduleTemplateId,
+            encodedImmFields,
+            encodedMutFields
+        )
+
+        emit VestingScheduleCreated(scheduleId, tokenId, beneficiary, amount, start, duration)
+    }
+
+    pub fn getVestingScheduleByAddress(address: Address)-> VestingSchedule {
+        let vestingScheduleId = subContractId!(encodeToByteVec!(address))
+        
+        return VestingSchedule(vestingScheduleId)
+    }
+}

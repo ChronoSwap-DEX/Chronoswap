@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix --ext ts",
     "test": "jest -i --config ./jest-config.json",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "build:scripts": "tsc --outDir ./dist/ scripts/*.ts"
   },
   "dependencies": {
     "@alephium/cli": "^0.29.3",

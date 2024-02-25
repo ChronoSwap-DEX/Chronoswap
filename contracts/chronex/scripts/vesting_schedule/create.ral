@@ -1,0 +1,3 @@
+TxScript CreateVestingSchedule(factory: VestingScheduleFactory, tokenId: ByteVec, amount: U256, beneficiary: Address, duration: U256) {
+    factory.createSchedule{callerAddress!() -> tokenId: amount, ALPH: 1 alph}(tokenId, amount, beneficiary, duration)
+}

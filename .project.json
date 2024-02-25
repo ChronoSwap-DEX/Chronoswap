@@ -23,6 +23,48 @@
       "codeHashDebug": "",
       "warnings": []
     },
+    "BurnXToken": {
+      "sourceFile": "chronex/scripts/liquid_staking/burn.ral",
+      "sourceCodeHash": "52b6241f5b4b1c2288a61e46542257838a187925e0bb028181cd344f5f28a777",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "BuyChronex": {
+      "sourceFile": "chronex/scripts/presale/buy_chronex.ral",
+      "sourceCodeHash": "44b1fe9146a3650df8e867644cc8edb0aacb6b5e003f029052627aa50ef53b3c",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "ChronexPresale": {
+      "sourceFile": "chronex/chronex_presale.ral",
+      "sourceCodeHash": "28622bce4a6ed013402b6bfe1303a70a624fd7eec7555886a1b2bd2b1e947a5b",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "92841263091066e79f85e643a434e97b5418f9734945bf3bab689130afc3a749",
+      "warnings": []
+    },
+    "ChronexToken": {
+      "sourceFile": "chronex/chronex_token.ral",
+      "sourceCodeHash": "ae6f552a97951ac2991c70b89d11c5666d1e447145f07a0f8590ef998a4421cd",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "1536c243844586114e3c7f768f9b45bc0fef35c01f44e853db0fdcb3337d5cf5",
+      "warnings": []
+    },
+    "ClaimRewards": {
+      "sourceFile": "chronex/scripts/staking/claim_rewards.ral",
+      "sourceCodeHash": "14927ed96f0dfa1fbe5edfa1f71e72430c02e6093027c4a818976cdcaca6302c",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "ClaimVestedTokens": {
+      "sourceFile": "chronex/scripts/vesting_schedule/claim_vested.ral",
+      "sourceCodeHash": "af2ff08cd09ff167df2fe0e0abfb110eb6aff9eb1cbd44a6579006bf30dc63c2",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
     "CollectFee": {
       "sourceFile": "scripts/collect_fee.ral",
       "sourceCodeHash": "1bf50ae9e84e3a698bf955f0ce7bfb14d2b05ac250255b7e0712dc523b6e44dc",
@@ -44,6 +86,27 @@
       "codeHashDebug": "",
       "warnings": []
     },
+    "CreateVestingSchedule": {
+      "sourceFile": "chronex/scripts/vesting_schedule/create.ral",
+      "sourceCodeHash": "20e0eb839249a082f4e4da77a88a51f1bcc3c86f9d6b2b0ac6484f3eb96715c7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "DepositChronex": {
+      "sourceFile": "chronex/scripts/presale/deposit.ral",
+      "sourceCodeHash": "140b2e554f5e8817713c258d76651de58200ac9aaaf12ed3e6bac568c5b72055",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "DestroyPresale": {
+      "sourceFile": "chronex/scripts/presale/destroy.ral",
+      "sourceCodeHash": "67871ab62d5f09819f99f7c5ae3db4e6005e2368c000528fc18d2b06c39a0b68",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
     "EnableFeeCollector": {
       "sourceFile": "scripts/enable_fee_collector.ral",
       "sourceCodeHash": "d910bff218027c5b1f43bcafcb53a11213f5fff26be50f3cda85c5484b4d8888",
@@ -55,7 +118,7 @@
       "sourceFile": "examples/example_oracle_simple.ral",
       "sourceCodeHash": "2b330617826658a6336ab325956bc44df89c251c6183e1b2d10805f26d0c8746",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "77c214087d18764740b2479fc13342959a21a02a36977c0d998667644200071a",
+      "codeHashDebug": "52a275cfc409ff8fce483c7f9af7242922b40286e1e3174a129476a459dc67ac",
       "warnings": []
     },
     "FeeCollectorFactory": {
@@ -83,7 +146,7 @@
       "sourceFile": "examples/fee_collector_per_token_pair_impl.ral",
       "sourceCodeHash": "12030965f27aedb1e593ea659314be67a7caf9a604885f4b8fc54f7303e95487",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "393eee49cd23c00d61848a8b2272e848f5278cc17f8c0b2333e2ed744edf5b79",
+      "codeHashDebug": "854934781b951bef0fe2035d06ef61bc11021157d31f464ac25364f5ef600c53",
       "warnings": []
     },
     "FullMath": {
@@ -114,6 +177,13 @@
       "codeHashDebug": "",
       "warnings": []
     },
+    "LiquidStaking": {
+      "sourceFile": "chronex/liquid_staking.ral",
+      "sourceCodeHash": "a39dd20222d9913c7a9052ad3e577ce03c72686cdc42ce022797221319037ba4",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "dc5d6f6640386ddbbc49f93fbd1104dcaecd6e25004cac6cb11c6ee69750793a",
+      "warnings": []
+    },
     "Math": {
       "sourceFile": "dex/math.ral",
       "sourceCodeHash": "4be2abb3b39ed86d4714b9459e40c2050b3593601ed9e51db97f2f1a95d5129a",
@@ -135,11 +205,53 @@
       "codeHashDebug": "",
       "warnings": []
     },
+    "MintChronex": {
+      "sourceFile": "chronex/scripts/chronex/mint.ral",
+      "sourceCodeHash": "8c28a2ff007973b7d6e7c9e4b5afbdfc44f81d47edd4a2c8d67e4f75d60da420",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "MintXToken": {
+      "sourceFile": "chronex/scripts/liquid_staking/mint.ral",
+      "sourceCodeHash": "e8537ef83da16760518199e5c391c2ca78769a9c4f817347398d509251784640",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
     "OracleErrors": {
       "sourceFile": "examples/errors.ral",
       "sourceCodeHash": "4d0ed85fbd224324446d1ddd22f5b4c87bb48a1fa0c5e1c3f0f4e48257a50e59",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "",
+      "warnings": []
+    },
+    "Pauseable": {
+      "sourceFile": "chronex/pauseable.ral",
+      "sourceCodeHash": "0a9ab5e8568190fff00534024b2e290e9f79d36a970b26fcf49593a55d084d8c",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "PauseableTest": {
+      "sourceFile": "test/pauseable_test.ral",
+      "sourceCodeHash": "cc2b70e6793e9979fb53f3402899bedd7fd449c05bf2a2c9cdc235401eabc9c8",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "accc04ce9a0639d9e75a35191f1850fcbab983ee7c5b6b364654c2fd0aff2bdf",
+      "warnings": []
+    },
+    "Permissions": {
+      "sourceFile": "chronex/permissions.ral",
+      "sourceCodeHash": "24b450b57515aa9212c9a844bc4064da5559b52ae2eac1e16454c9bdd4a3aaf6",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "PermissionsTest": {
+      "sourceFile": "test/permissions_test.ral",
+      "sourceCodeHash": "676ef6638efbd20f832f962da6bfa9abc2226c93f7ce8dc5d6a913aba597ab38",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "9faa4a80ad67c7d8360699436106de3efe6b693f883be86e5e3b14e53dbb34a9",
       "warnings": []
     },
     "RemoveLiquidity": {
@@ -153,12 +265,40 @@
       "sourceFile": "dex/router.ral",
       "sourceCodeHash": "c954ad981c2457825654144d2930cf07266efeb0013603532ac925ca85db2eca",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "5b325453e5506a90851742af5f7797303703acecb523830220a105a88273b1b0",
+      "codeHashDebug": "633e8976ba3d86558719ebfe9f34c7ec4da2e7a78b5e043a60723b34f4f0ab80",
       "warnings": []
     },
     "SetFeeCollectorFactory": {
       "sourceFile": "scripts/set_fee_collector_factory.ral",
       "sourceCodeHash": "44709be4a8a58f2dbbbf9d8bb8b09c9654e3ef14a177fe44fdc451c072ba588d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "Stake": {
+      "sourceFile": "chronex/scripts/staking/stake.ral",
+      "sourceCodeHash": "48b84e782d4b2abf6a1756877138bcb0dff805fdff654bdf5ac08857ed13db43",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "Staking": {
+      "sourceFile": "chronex/staking.ral",
+      "sourceCodeHash": "967d757cf35db21b9a50cfad2ffd307cff8f64f1d19d08b667fd9b0076aa59a7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "1dcf33af1a73e1a38f05b168f5d6da7e10e69607142b331825afaba1f2502ecd",
+      "warnings": []
+    },
+    "StakingAccount": {
+      "sourceFile": "chronex/staking_account.ral",
+      "sourceCodeHash": "3a8f31e2e213d55978bf9f2ab645912e0ca49d42d937696d1899abe816fe07e6",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "fcc04774d79eddbeb3fa437b898b159e647b8eca0c95510b98f64320d19ca707",
+      "warnings": []
+    },
+    "StakingAccountFactory": {
+      "sourceFile": "chronex/staking_account_factory.ral",
+      "sourceCodeHash": "cb8bf7b1c20525178bd3099d804f8f5df7496f6109cf6db574f3dbe544760e0b",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "",
       "warnings": []
@@ -193,9 +333,9 @@
     },
     "TokenPair": {
       "sourceFile": "dex/token_pair.ral",
-      "sourceCodeHash": "3de8e04bfa9588f981d679c403f74177fb777e9d199c880f7300bd3f1365e373",
+      "sourceCodeHash": "32065060a550ff6ae12a4b7b4eb6918dcab50408dd47b6c4a2c705f5f5f2d33f",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "4a98763809adb6e899e3e7864e6d5dcb60c6fd0806f1264c3596b482021035f2",
+      "codeHashDebug": "0ba23e4d958bc08a84958516f398b18390a393e91d4952b9816864565388a596",
       "warnings": []
     },
     "TokenPairFactory": {
@@ -203,6 +343,62 @@
       "sourceCodeHash": "19388715466d7a867264ca64b362f4c1aeac7aad99816acd7e660358ee6b6095",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "44144899a2b71465a80654889afa8a2bf4a8f3cd0f30ad1880d2ffc7c12ad18b",
+      "warnings": []
+    },
+    "TopUpRewards": {
+      "sourceFile": "chronex/scripts/liquid_staking/topup_rewards.ral",
+      "sourceCodeHash": "22f6d5c68e01a7d3d850aa87e3a2af8e186d0dfd125f2ed278be534732264b46",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "Unstake": {
+      "sourceFile": "chronex/scripts/staking/unstake.ral",
+      "sourceCodeHash": "de02abe9dfe542392739bd109a289b56aa9a07a4e7d5df7a2c099d2fa28cb7a2",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "UpgradeLiquidStaking": {
+      "sourceFile": "chronex/scripts/liquid_staking/upgrade.ral",
+      "sourceCodeHash": "cdfc0648743c1042795ed28e2d9cb4c247dcf22d2d061ade6ac75b61059be92c",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "UpgradePresale": {
+      "sourceFile": "chronex/scripts/presale/upgrade.ral",
+      "sourceCodeHash": "7e3b93a8f7657badc804a92d7b06f316c28a9458aa0a6f0224511a752d0e861e",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "UpgradeStaking": {
+      "sourceFile": "chronex/scripts/staking/upgrade.ral",
+      "sourceCodeHash": "5579ab9c9431ce782108a417789387c5cfce52df4cca7d1f0ff94a8477bac934",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
+      "warnings": []
+    },
+    "VestingSchedule": {
+      "sourceFile": "chronex/vesting_schedule.ral",
+      "sourceCodeHash": "faa8ce8c7fcdcd48c7e712578a075dd24822e98bba496b660ae66c03a1d5d1b3",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "3dd6a9d365618b80604b8979b83f0fb501fe28c56cc40eda6f98ccf11352ee23",
+      "warnings": []
+    },
+    "VestingScheduleFactory": {
+      "sourceFile": "chronex/vesting_schedule_factory.ral",
+      "sourceCodeHash": "33515bf3a26d495ce89d70e44dc250613230ba47947aea6d2d990eec257c547c",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "e81f54e3e8c5776aad49ff648c69d78fb1df48f7fe14e7c3b3abf922121b49c4",
+      "warnings": []
+    },
+    "WithdrawFees": {
+      "sourceFile": "scripts/withdraw_fees.ral",
+      "sourceCodeHash": "b39221d612f9ce7ff368499e69727ad72baa4c3b5ae29c54a0c353c406b79e16",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "",
       "warnings": []
     }
   }

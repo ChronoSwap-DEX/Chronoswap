@@ -1,0 +1,3 @@
+TxScript DepositChronex(presale: ChronexPresale, amount: U256) {
+    presale.depositChronex{callerAddress!() -> presale.getChronexTokenId(): amount}(amount)
+}

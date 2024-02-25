@@ -1,0 +1,23 @@
+Abstract Contract Pauseable(mut owner_: Address, mut paused_: Bool) extends Permissions(owner_) {
+    enum PauseableErrorCodes {
+        Paused = 0
+    }
+
+    @using(updateFields = true)
+    pub fn pause() -> () {
+        onlyOwner(callerAddress!())
+
+        paused_ = true
+    }
+
+    @using(updateFields = true)
+    pub fn unpause() -> () {
+        onlyOwner(callerAddress!())
+
+        paused_ = false
+    }
+
+    fn whenNotPaused() -> () {
+        assert!(paused_ == false, PauseableErrorCodes.Paused)
+    }
+}

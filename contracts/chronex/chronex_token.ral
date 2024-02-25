@@ -1,0 +1,52 @@
+import "std/fungible_token_interface"
+
+Contract ChronexToken(
+    mut totalSupply: U256,
+    mut owner_: Address
+) extends Permissions(owner_) implements IFungibleToken {
+    event Mint(to: Address, amount: U256)
+    event Burn(from: Address, amount: U256)
+
+    @using(assetsInContract = true, updateFields = true)
+    pub fn mint(to: Address, amount: U256) -> () {
+        onlyOwner(callerAddress!())
+
+        transferTokenFromSelf!(to, selfTokenId!(), amount)
+        totalSupply = totalSupply + amount
+
+        emit Mint(to, amount)
+    }
+
+    @using(assetsInContract = true, preapprovedAssets = true, updateFields = true, checkExternalCaller = false)
+    pub fn burn(amount: U256) -> () {
+        let from = callerAddress!()
+
+        transferTokenToSelf!(from, selfTokenId!(), amount)
+
+        totalSupply = totalSupply - amount
+
+        emit Burn(from, amount)
+    }
+
+    pub fn getSymbol() -> ByteVec {
+        return #43485258 //"CHRX"
+    }
+
+    pub fn getName() -> ByteVec {
+        return #4368726f6e6578 //"Chronex"
+    }
+
+    pub fn getDecimals() -> U256 {
+        return 18
+    }
+
+    pub fn getTotalSupply() -> U256 {
+        return totalSupply
+    }
+
+    pub fn upgrade(newBytecode: ByteVec) -> () {
+        onlyOwner(callerAddress!())
+
+        migrate!(newBytecode)
+    }
+}

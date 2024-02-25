@@ -15,6 +15,8 @@ import {
   FeeCollectorPerTokenPairImplInstance,
   FeeCollectorFactoryImpl,
   FeeCollectorFactoryImplInstance,
+  ChronexToken,
+  ChronexTokenInstance,
 } from ".";
 import { default as devnetDeployments } from "../.deployments.devnet.json";
 
@@ -26,6 +28,7 @@ export type Deployments = {
     Router: DeployContractExecutionResult<RouterInstance>;
     FeeCollectorPerTokenPairImpl: DeployContractExecutionResult<FeeCollectorPerTokenPairImplInstance>;
     FeeCollectorFactoryImpl: DeployContractExecutionResult<FeeCollectorFactoryImplInstance>;
+    ChronexToken: DeployContractExecutionResult<ChronexTokenInstance>;
   };
 };
 
@@ -59,6 +62,12 @@ function toDeployments(json: any): Deployments {
       ...json.contracts["FeeCollectorFactoryImpl"],
       contractInstance: FeeCollectorFactoryImpl.at(
         json.contracts["FeeCollectorFactoryImpl"].contractInstance.address
+      ),
+    },
+    ChronexToken: {
+      ...json.contracts["ChronexToken"],
+      contractInstance: ChronexToken.at(
+        json.contracts["ChronexToken"].contractInstance.address
       ),
     },
   };

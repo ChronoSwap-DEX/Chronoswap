@@ -113,7 +113,7 @@ export const FeeCollectorPerTokenPairImpl = new Factory(
   Contract.fromJson(
     FeeCollectorPerTokenPairImplContractJson,
     "",
-    "393eee49cd23c00d61848a8b2272e848f5278cc17f8c0b2333e2ed744edf5b79"
+    "854934781b951bef0fe2035d06ef61bc11021157d31f464ac25364f5ef600c53"
   )
 );
 

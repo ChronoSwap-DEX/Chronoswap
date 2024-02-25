@@ -1,0 +1,3 @@
+TxScript ClaimVestedTokens(schedule: VestingSchedule) {
+    schedule.claimVestedTokens()
+}

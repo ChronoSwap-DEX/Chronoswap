@@ -1,0 +1,3 @@
+TxScript ClaimRewards(staking: Staking) {
+    staking.claimRewards()
+}
