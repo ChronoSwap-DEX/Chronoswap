@@ -7,7 +7,9 @@ import { store } from "@/state"
 import { Provider } from "react-redux"
 import "../css/CircleLoader.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import { Poppins as Font } from "next/font/google"
+
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     
     <Provider store={store}>
@@ -18,5 +20,3 @@ function MyApp({ Component, pageProps }: AppProps) {
       
   );
 }
-
-export default MyApp;

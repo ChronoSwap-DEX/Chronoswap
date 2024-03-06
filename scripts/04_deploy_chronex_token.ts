@@ -7,7 +7,7 @@ const deployChronexToken: DeployFunction<Settings> = async (
     network: Network<Settings>
   ): Promise<void> => {
 
-  const issueTokenAmount = 10_000_000n * (10n ** 18n)
+  const issueTokenAmount = 100_000_000n * (10n ** 18n)
   
   const result = await deployer.deployContract(ChronexToken, {
     issueTokenAmount: issueTokenAmount,

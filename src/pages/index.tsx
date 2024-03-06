@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import IndexLayout from '@/components/indexLayout';
 
+import { buttonVariants } from "@/components/button"
+
 const Home: React.FC = () => {
   // You would fetch real data here, using the alephium libs
   
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
           <p className="text-xl text-gray-300 mb-8">
             Enter the cosmos of the Alephium ecosystem to trade over 20 tokens perpetually.
           </p>
-          <Link href="/swap" className='w-full max-w-xs bg-gradient-to-tr from-blue-950 to-indigo-800 hover:bg-blue-700 text-center font-bold py-3 rounded-xl'>
+          <Link href="/swap" className={buttonVariants({ variant: "outline" })}>
               Enter App
           </Link>
 

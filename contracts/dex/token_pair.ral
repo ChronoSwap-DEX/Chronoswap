@@ -34,7 +34,6 @@ Contract TokenPair(
     return reserve0, reserve1
   }
 
-  @using(checkExternalCaller = false)
   fn pairName_() -> ByteVec {
     let alph_ = #414c5048
     let mut tokenA = alph_
@@ -51,10 +50,12 @@ Contract TokenPair(
     return tokenA ++ tokenB
   }
 
+  @using(checkExternalCaller = false)
   pub fn getSymbol() -> ByteVec {
     return pairName_()
   }
 
+  @using(checkExternalCaller = false)
   pub fn getName() -> ByteVec {
     return pairName_()
   }
