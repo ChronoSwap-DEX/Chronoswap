@@ -21,8 +21,12 @@ import { DetailItem } from "@/components//DetailsItem";
 import { useWallet } from "@alephium/web3-react";
 import MainLayout from "@/components/mainLayout";
 
+import React from 'react';
+import TradingViewChart from '@/components/TradingViewChart';
+
 function Swap() {
-  
+
+
   const [txId, setTxId] = useState<string | undefined>(undefined)
   const [swapping, setSwapping] = useState<boolean>(false)
   const dispatch = useDispatch()
@@ -203,11 +207,17 @@ function Swap() {
                 
               </Collapse>
             </div>
+            <h1>HI The chart goes below here.</h1>
+            
+              <TradingViewChart />
+            
+
 
           </div>
 
         </div>
       </div>
+      
     </MainLayout>
   );
 }
