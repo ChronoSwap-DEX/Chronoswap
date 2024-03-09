@@ -1,21 +1,11 @@
 // pages/index.tsx
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import IndexLayout from '@/components/indexLayout';
-
 import { buttonVariants } from "@/components/button"
 
 const Home: React.FC = () => {
-  // You would fetch real data here, using the alephium libs
-  
-  const stats = [
-    { label: 'CHRON PRICE', value: '$0.26' },
-    { label: 'TOTAL LIQUIDITY', value: '$16.09M' },
-    { label: 'TOTAL VOLUME', value: '$5.89M' },
-    { label: 'TOTAL PAIRS', value: '29' }
-  ];
-
+    
   return (
     <IndexLayout>
       <div className="flex flex-col min-h-screen justify-center items-center text-white">

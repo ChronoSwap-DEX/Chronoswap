@@ -1,6 +1,29 @@
 import React from "react";
 import Head from "next/head";
-import { CustomNavbar, CustomSidebar } from "@/components/navbar";
+import { CustomNavbar } from "@/components/navbar";
+import { ThemeProvider } from "./themeProvider";
+import { Poppins as FontSans } from "next/font/google"
+import Image from 'next/image'
+import { cn } from "@/lib/utils"
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: "500"
+})
+
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,14 +34,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/images/logo_NoText_NoWhite.png" />
       </Head>
 
-      <CustomNavbar />
-
-      <div className="flex">
-        <CustomSidebar />
         <div className="flex-1">
-          <main className="bg-gray-900 min-h-screen flex-grow p-8">{children}</main>
+        <ThemeProvider  attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <main className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
+          <CustomNavbar/>
+            {children}
+          </main>
+        </ThemeProvider>
         </div>
-      </div>
     </>
   );
 }
