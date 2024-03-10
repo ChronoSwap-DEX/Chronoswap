@@ -7,3 +7,5 @@ lerna-debug.log
 /.next
 /artifacts
 /.mongoDB
+/mongoDB/pw.md
+/mongoDB/testing.py
