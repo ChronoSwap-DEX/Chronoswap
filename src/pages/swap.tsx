@@ -207,9 +207,9 @@ function Swap() {
                 
               </Collapse>
             </div>
-            <h1>HI The chart goes below here.</h1>
+            <h1>HI The chart goes below here.<TradingViewChart /></h1>
             
-              <TradingViewChart />
+              
             
 
 
