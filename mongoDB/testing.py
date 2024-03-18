@@ -91,7 +91,7 @@ def print_data_in_nice_format(data):
 def main():
     client, collection = connect_to_mongodb()
     # Delete all documents in the collection
-    result = collection.delete_many({})
+    #result = collection.delete_many({})
     #generate test data
     generate_test_data(collection)
 

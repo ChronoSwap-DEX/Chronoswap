@@ -20,12 +20,21 @@ alphNGU_ContractID = '21nj6sBTtQfTwCErYAHF3CNBaDRAc1E1Q3aUCcbsuG8mu'
 headers = {'accept': 'application/json'}
 
 def get_poolValue(contract):
+    # need to grab the decimals of a each token. they are dynamic dependent on contact!!!!!!
+   # curl -X 'POST' \
+  #'https://backend-v113.mainnet.alephium.org/tokens/fungible-metadata' \
+  #-H 'accept: application/json' \
+  #-H 'Content-Type: application/json' \
+  #-d '[
+ # "df3008f43a7cc1d4a37eef71bf581fc4b9c3be4e2d58ed6d1df483bbb83bd200"
+#]'
+
+#decimals!!!
     url_token = 'https://backend-v113.mainnet.alephium.org/addresses/'
     response = requests.get(url_token + contract + '/tokens-balance', headers=headers)
     success = False
     if response.status_code == 200:
         json_data = response.json()
-
         token1 = {
         'tokenId': json_data[0]['tokenId'],
         'balance': (json_data[0]['balance']),
@@ -38,21 +47,35 @@ def get_poolValue(contract):
         'lockedBalance': (json_data[1]['lockedBalance'])
         }
 
-        #print("Token Balance:", int(token2['balance'])/100000000)
-
-        response = requests.get(url_token + contract + '/balance', headers=headers)
+        print("Token Balance:", int(token2['balance']))
+        #Now we need to get the amount of decimals for the token. We know alephium uses 18 zeros.
+        post_data = [token2['tokenId']]
+        response = requests.post('https://backend-v113.mainnet.alephium.org/tokens/fungible-metadata',headers=headers, json=post_data)
         if response.status_code == 200:
             json_data = response.json()
-            token_alph = {
-            'balance': (json_data['balance']),
-            'lockedBalance': (json_data['lockedBalance'])
-            }
-            success = True
-            #print('Alph Balance', int(token_alph['balance']) / 1000000000000000000)
-            return (int(token_alph['balance']) / 1000000000000000000)/(int(token2['balance'])/100000000)
+            token2_meta = {
+                'id': json_data[0]['id'],
+                'symbol': json_data[0]['symbol'],
+                'name': json_data[0]['name'],
+                'decimals': json_data[0]['decimals']
+                }
+            token2_decimal = (10 ** int(token2_meta['decimals'])) #eg 1000 if decimal equal 3
+            response = requests.get(url_token + contract + '/balance', headers=headers)
+            if response.status_code == 200:
+                json_data = response.json()
+                token_alph = {
+                'balance': (json_data['balance']),
+                'lockedBalance': (json_data['lockedBalance'])
+                }
+                #wow finally
+                success = True
+                print('Alph Balance', int(token_alph['balance']))
+                return (int(token_alph['balance']) / 1000000000000000000)/(int(token2['balance'])/token2_decimal)
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
         else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(response.text)
+            print("Error:", response.status_code, response.text)
     else:
         print(f"Request failed with status code: {response.status_code}")
         print(response.text)
@@ -102,17 +125,25 @@ def read_pool_list_json():
     file_path = os.path.join(os.path.dirname(__file__), 'pool_list.json')
     with open(file_path, 'r') as json_file:
         data = json.load(json_file)
+    print("*******************************************************************")
+    print(datetime.utcnow())
     for item in data:
         token_pair = item["token_pair"]
         contract_id = item["contract_id"]
-        poolprice = get_poolValue(alphwifb_ContractID)
-        if poolprice > 0:
-            print('Pool price of ', token_pair, ' is: ' , poolprice)
-            client, collection = connect_to_mongodb(token_pair)
-            sendComponentToDatabase(collection, token_pair, poolprice)
-            client.close()
-        else:
-            print("Pool price of ", token_pair, " is less than or equal to zero. Data has not been sent to DB")
+        try:
+            poolprice = get_poolValue(contract_id)
+            if poolprice > 0:
+                print('Pool price of ', token_pair, ' is: ' , poolprice)
+                client, collection = connect_to_mongodb(token_pair)
+                sendComponentToDatabase(collection, token_pair, poolprice)
+                client.close()
+            else:
+                print("Pool price of ", token_pair, " is less than or equal to zero. Data has not been sent to DB")
+            if item != data[-1]:
+                print("-------------------------------------")
+        except Exception as e:
+            print("Error!")
+    print("*******************************************************************")
 
 
 
