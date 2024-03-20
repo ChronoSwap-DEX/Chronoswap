@@ -3,14 +3,14 @@
 import { MongoClient } from 'mongodb';
 
 export default async function handler(req, res) {
-  const uri = 'speaktotrevforuri
+  const uri = 'mongodb+srv://trevorboultwood:0gdZWu6kqk9oyzf5@cluster0.1wniszp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   try {
     
     await client.connect();
 
     const database = client.db('chronoswap');
-    const collection = database.collection('alph/chronx');
+    const collection = database.collection('Alph/WIFB');
 
     
     const data = await collection.find({}).toArray();

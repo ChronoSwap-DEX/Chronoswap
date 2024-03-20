@@ -6,6 +6,5 @@ lerna-debug.log
 .deployments.devnet.json
 /.next
 /artifacts
-/.mongoDB
 /mongoDB/pw.md
-/mongoDB/testing.py
+/mongoDB/connectionstring.env

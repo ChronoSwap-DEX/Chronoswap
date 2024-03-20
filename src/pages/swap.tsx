@@ -23,6 +23,7 @@ import MainLayout from "@/components/mainLayout";
 
 import React from 'react';
 import TradingViewChart from '@/components/TradingViewChart';
+import FlowByteChart from '@/components/flowbyteChart'
 
 function Swap() {
 
@@ -207,7 +208,7 @@ function Swap() {
                 
               </Collapse>
             </div>
-            <h1>HI The chart goes below here.<TradingViewChart /></h1>
+            <FlowByteChart />
             
               
             
